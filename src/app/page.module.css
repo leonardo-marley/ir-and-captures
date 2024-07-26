@@ -5,10 +5,17 @@
 }
 
 .painel {
-  display: flex;
+  position: relative;
   width: 100vw;
   height: 20rem;
-  justify-content: center;
-  align-items: center;
+}
+
+.imgPainel {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
