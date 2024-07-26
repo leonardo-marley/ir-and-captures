@@ -8,17 +8,19 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import MenuM from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import PeopleIcon from '@mui/icons-material/People';
+import PanToolAltIcon from '@mui/icons-material/PanToolAlt';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import InfoIcon from '@mui/icons-material/Info';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { Button } from "@mui/material";
 
 const Search = styled('div')(({ theme }) => ({
@@ -104,8 +106,8 @@ export default function Menu() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} disabled>Entrar</MenuItem>
+      <MenuItem onClick={handleMenuClose} disabled>Cadastrar</MenuItem>
     </MenuM>
   );
 
@@ -127,24 +129,58 @@ export default function Menu() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
+        <IconButton
+          size="large"
+          color="inherit"
+        >
+          <HomeIcon />
         </IconButton>
-        <p>Messages</p>
+        <p>Home</p>
       </MenuItem>
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
+          <FileDownloadIcon />
         </IconButton>
-        <p>Notifications</p>
+        <p>Downloads</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          color="inherit"
+        >
+          <PeopleIcon />
+        </IconButton>
+        <p>Comunidade</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          color="inherit"
+        >
+          <PanToolAltIcon />
+        </IconButton>
+        <p>Recursos</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          color="inherit"
+        >
+          <InfoIcon />
+        </IconButton>
+        <p>Sobre</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          color="inherit"
+        >
+          <ContactSupportIcon />
+        </IconButton>
+        <p>Contato</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -183,14 +219,35 @@ export default function Menu() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button color="inherit" sx={{fontWeight: '600'}}>
+            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
+              backgroundColor: '#341931',
+            },}}>
               Home
             </Button>
-            <Button
-              sx={{fontWeight: '600'}}
-              color="inherit"
-            >
+            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
+              backgroundColor: '#341931',
+            },}}>
               Downloads
+            </Button>
+            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
+              backgroundColor: '#341931',
+            },}}>
+              Comunidade
+            </Button>
+            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
+              backgroundColor: '#341931',
+            },}}>
+              Recursos
+            </Button>
+            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
+              backgroundColor: '#341931',
+            },}}>
+              Sobre
+            </Button>
+            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
+              backgroundColor: '#341931',
+            },}}>
+              Contato
             </Button>
             <IconButton
               size="large"
@@ -200,6 +257,9 @@ export default function Menu() {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
+              sx={{'&:hover': {
+                backgroundColor: '#341931',
+              }}}
             >
               <AccountCircle />
             </IconButton>
