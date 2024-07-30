@@ -22,6 +22,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import InfoIcon from '@mui/icons-material/Info';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { Button } from "@mui/material";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -64,8 +65,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
 export default function Menu() {
+  const router = useRouter();
+  const pathname = usePathname()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -87,6 +89,10 @@ export default function Menu() {
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClick = (codigo: number) => {
+    router.push(`${pathname}?cMenu=${codigo}`, { scroll: false })
   };
 
   const menuId = 'primary-search-account-menu';
@@ -221,32 +227,32 @@ export default function Menu() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
               backgroundColor: '#341931',
-            },}}>
+            },}} onClick={() => handleMenuClick(1)}>
               Home
             </Button>
             <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
               backgroundColor: '#341931',
-            },}}>
+            },}} onClick={() => handleMenuClick(2)}>
               Downloads
             </Button>
             <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
               backgroundColor: '#341931',
-            },}}>
+            },}} onClick={() => handleMenuClick(3)}>
               Comunidade
             </Button>
             <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
               backgroundColor: '#341931',
-            },}}>
+            },}} onClick={() => handleMenuClick(4)}>
               Recursos
             </Button>
             <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
               backgroundColor: '#341931',
-            },}}>
+            },}} onClick={() => handleMenuClick(5)}>
               Sobre
             </Button>
             <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
               backgroundColor: '#341931',
-            },}}>
+            },}} onClick={() => handleMenuClick(6)}>
               Contato
             </Button>
             <IconButton
