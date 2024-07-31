@@ -67,7 +67,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Menu() {
   const router = useRouter();
-  const pathname = usePathname()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -225,34 +226,76 @@ export default function Menu() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
-              backgroundColor: '#341931',
-            },}} onClick={() => handleMenuClick(1)}>
+            <Button color="inherit" sx={searchParams.get('cMenu') === '1' ? 
+              {
+                fontWeight: '600',
+                backgroundColor: '#341931'
+              }
+            : {
+                fontWeight: '600', '&:hover': {
+                  backgroundColor: '#341931',
+                },
+              }} onClick={() => handleMenuClick(1)}>
               Home
             </Button>
-            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
-              backgroundColor: '#341931',
-            },}} onClick={() => handleMenuClick(2)}>
+            <Button color="inherit" sx={searchParams.get('cMenu') === '2' ? 
+              {
+                fontWeight: '600',
+                backgroundColor: '#341931'
+              }
+            : {
+                fontWeight: '600', '&:hover': {
+                  backgroundColor: '#341931',
+                },
+              }} onClick={() => handleMenuClick(2)}>
               Downloads
             </Button>
-            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
-              backgroundColor: '#341931',
-            },}} onClick={() => handleMenuClick(3)}>
+            <Button color="inherit" sx={searchParams.get('cMenu') === '3' ? 
+              {
+                fontWeight: '600',
+                backgroundColor: '#341931'
+              }
+            : {
+                fontWeight: '600', '&:hover': {
+                  backgroundColor: '#341931',
+                },
+              }} onClick={() => handleMenuClick(3)}>
               Comunidade
             </Button>
-            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
-              backgroundColor: '#341931',
-            },}} onClick={() => handleMenuClick(4)}>
+            <Button color="inherit" sx={searchParams.get('cMenu') === '4' ? 
+              {
+                fontWeight: '600',
+                backgroundColor: '#341931'
+              }
+            : {
+                fontWeight: '600', '&:hover': {
+                  backgroundColor: '#341931',
+                },
+              }} onClick={() => handleMenuClick(4)}>
               Recursos
             </Button>
-            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
-              backgroundColor: '#341931',
-            },}} onClick={() => handleMenuClick(5)}>
+            <Button color="inherit" sx={searchParams.get('cMenu') === '5' ? 
+              {
+                fontWeight: '600',
+                backgroundColor: '#341931'
+              }
+            : {
+                fontWeight: '600', '&:hover': {
+                  backgroundColor: '#341931',
+                },
+              }} onClick={() => handleMenuClick(5)}>
               Sobre
             </Button>
-            <Button color="inherit" sx={{fontWeight: '600', '&:hover': {
-              backgroundColor: '#341931',
-            },}} onClick={() => handleMenuClick(6)}>
+            <Button color="inherit" sx={searchParams.get('cMenu') === '6' ? 
+              {
+                fontWeight: '600',
+                backgroundColor: '#341931'
+              }
+            : {
+                fontWeight: '600', '&:hover': {
+                  backgroundColor: '#341931',
+                },
+              }} onClick={() => handleMenuClick(6)}>
               Contato
             </Button>
             <IconButton
