@@ -42,8 +42,8 @@
 .imgContato{
   display: flex;
   position: relative;
-  bottom: 40px;
-  left: 100px;
-  transform: rotate(-15deg);
+  bottom: 20px;
+  left: 70px;
+  transform: rotate(-14deg);
 }
 
