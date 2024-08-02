@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import { styled } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
 import SendIcon from '@mui/icons-material/Send';
+import Loading from "./components/Loading";
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -69,7 +70,13 @@ export default function Home() {
       case 1:
         return (
           <div className={styles.containerConteudo}>
-            <h1>Home</h1>
+            <div className={styles.containerHome}>
+              <h1>Home</h1>
+              <Loading 
+                width={100}
+                height={100}
+              />
+            </div>
           </div>
         );
       case 2:
