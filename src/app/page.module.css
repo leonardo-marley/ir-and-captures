@@ -2,7 +2,7 @@
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-color: #ffffff80;
+  background-color: #fff;
 }
 
 .containerConteudo {
