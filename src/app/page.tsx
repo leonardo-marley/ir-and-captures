@@ -101,7 +101,7 @@ export default function Home() {
           <div className={styles.containerConteudo}>
             <div className={styles.containerContato}>
               <div className={styles.containerForm}>
-                <h1 style={{marginBottom: '1rem'}}>Contate-nos</h1>
+                <h1 style={{marginBottom: '1rem', color: '#000000' }}>Contate-nos</h1>
                 <CssTextField
                   required
                   id="outlined-required"
