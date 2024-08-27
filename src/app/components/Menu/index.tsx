@@ -464,9 +464,9 @@ export default function Menu() {
 
             <span 
               style={{display: 'flex',width: 'fit-content',
-                alignSelf: 'flex-end', padding: '.5rem 5rem'}}>Ainda não tem conta? <p style={{
+                alignSelf: 'flex-end', padding: '.5rem 5rem', gap: '.5rem'}}>Ainda não tem conta? <p style={{
               color: '#9d2053',
-              cursor: 'pointer', gap: '.5rem'}}>&nbsp; Cadastrar</p></span>
+              cursor: 'pointer', }}>Cadastrar</p></span>
           </div>
       </Popup>
     </Box>
