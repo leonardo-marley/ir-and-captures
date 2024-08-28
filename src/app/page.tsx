@@ -94,16 +94,10 @@ export default function Home() {
       case 4:
         return (
           <div className={styles.containerConteudo}>
-            <h1>Recursos</h1>
-          </div>
-        );
-      case 5:
-        return (
-          <div className={styles.containerConteudo}>
             <h1>Sobre</h1>
           </div>
         );
-      case 6:
+      case 5:
         return (
           <div className={styles.containerConteudo}>
             <div className={styles.containerContato}>

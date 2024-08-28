@@ -26,3 +26,37 @@
     justify-content: flex-end;
     padding-right: 2rem;
 }
+
+.modalTop{
+    display: grid;
+    grid-auto-flow: column;
+    width: 100%;
+    justify-content: flex-end;
+}
+  
+.modalClose{
+    background-color: transparent;
+    border: none;  
+    outline: none;
+    padding: 0.3rem;
+    border-radius: 50%;
+    line-height: 1rem;  
+    font-size: 2rem;  
+    cursor: pointer;
+}
+
+.containerLoginForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+.containerLoginForm > p:hover {
+    text-decoration: underline;
+}
+
+.containerLoginForm > span > p:hover {
+    text-decoration: underline;
+}
