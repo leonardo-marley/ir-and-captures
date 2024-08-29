@@ -2,27 +2,56 @@
 
 import Image from "next/image";
 import styles from "./menu.module.css";
-import React from "react";
+import React, { useState } from "react";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
+import LoginIcon from '@mui/icons-material/Login';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
+import LockIcon from '@mui/icons-material/Lock';
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
 import MenuItem from '@mui/material/MenuItem';
 import MenuM from '@mui/material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import PeopleIcon from '@mui/icons-material/People';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import PanToolAltIcon from '@mui/icons-material/PanToolAlt';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import InfoIcon from '@mui/icons-material/Info';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
-import { Button } from "@mui/material";
+import { Button, FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Popup from 'reactjs-popup';
+import TextField from '@mui/material/TextField';
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#000000',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#B2BAC2',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#E0E3E7',
+    },
+    '&:hover fieldset': {
+      borderColor: '#B2BAC2',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#341931',
+    },
+  },
+});
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -69,23 +98,27 @@ export default function Menu() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [modalLogin, setModalLogin] = useState<boolean>(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [showPassword, setShowPassword] = React.useState(false);
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
+  const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
+  const handleProfileMenuOpen = () => {
+    setModalLogin(true);
   };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -97,26 +130,6 @@ export default function Menu() {
   };
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <MenuM
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose} disabled>Entrar</MenuItem>
-      <MenuItem onClick={handleMenuClose} disabled>Cadastrar</MenuItem>
-    </MenuM>
-  );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -161,15 +174,6 @@ export default function Menu() {
           <PeopleIcon />
         </IconButton>
         <p>Comunidade</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          color="inherit"
-        >
-          <PanToolAltIcon />
-        </IconButton>
-        <p>Recursos</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -272,7 +276,7 @@ export default function Menu() {
                   backgroundColor: '#341931',
                 },
               }} onClick={() => handleMenuClick(4)}>
-              Recursos
+              Sobre
             </Button>
             <Button color="inherit" sx={searchParams.get('cMenu') === '5' ? 
               {
@@ -284,34 +288,25 @@ export default function Menu() {
                   backgroundColor: '#341931',
                 },
               }} onClick={() => handleMenuClick(5)}>
-              Sobre
-            </Button>
-            <Button color="inherit" sx={searchParams.get('cMenu') === '6' ? 
-              {
-                fontWeight: '600',
-                backgroundColor: '#341931'
-              }
-            : {
-                fontWeight: '600', '&:hover': {
-                  backgroundColor: '#341931',
-                },
-              }} onClick={() => handleMenuClick(6)}>
               Contato
             </Button>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
+            <Button
               onClick={handleProfileMenuOpen}
               color="inherit"
               sx={{'&:hover': {
-                backgroundColor: '#341931',
-              }}}
+                backgroundColor: '#9d2053',
+                border: '1px solid #fff'
+              }, border: '1px solid transparent', 
+                 fontSize: '14px', 
+                 fontWeight: 600, 
+                 gap: '.5rem', 
+                 backgroundColor: '#9d2053',
+                 marginLeft: '14px'  
+                }}
             >
+              Login
               <AccountCircle />
-            </IconButton>
+            </Button>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -328,7 +323,152 @@ export default function Menu() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
+
+      <Popup
+        className={styles.globalModalClass}
+        modal={true}        
+        nested
+        open={modalLogin}
+        //onOpen={}
+        // closeOnDocumentClick
+        keepTooltipInside=".tooltipBoundary"
+        onClose={() => setModalLogin(false)}      
+        contentStyle={{
+          backgroundColor: '#fff',        
+          padding: '1rem',
+          borderRadius: '5px',        
+          textAlign: 'center',
+          display: 'grid',        
+          color:'black',      
+          width :'100%' ,
+          gap: '10px',
+          maxWidth: '50rem',
+          maxHeight: '90vh',
+          overflowY: 'auto'
+        }}
+        overlayStyle={{
+          backgroundColor: 'rgba(0,0,0,0.4)',    
+          padding: '1rem'
+        }}           
+      >
+        <div className={styles.modalTop}>        
+          <button 
+            className={styles.modalClose}
+            onClick={() => setModalLogin(false)}
+          >&times;</button>
+        </div>
+          <div className={styles.containerLoginForm}>
+            <h1>Login</h1>
+            <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', padding: '2rem 5rem' }}>
+              <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+              <CssTextField 
+                id="input-with-sx" 
+                label="Email" 
+                variant="standard" 
+                sx={{width: '100%'}}
+              />
+            </Box>
+
+            <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', padding: '0 5rem' }}>
+              <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+              <CssTextField 
+                id="input-with-sx" 
+                label="Senha" 
+                variant="standard" 
+                type={showPassword ? 'text' : 'password'}
+                sx={{width: '100%'}}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        onMouseUp={handleMouseUpPassword}
+                      >
+                        {!showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Box>
+
+            <p style={{
+              color: '#9d2053',
+              cursor: 'pointer',
+              padding: '1rem 5rem',
+              width: 'fit-content',
+              alignSelf: 'flex-end'
+            }}>Esqueceu a senha ?</p>
+
+            <Button
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+              sx={{'&:hover': {
+                backgroundColor: '#9d2053'
+              }, 
+                 fontSize: '14px', 
+                 fontWeight: 400, 
+                 gap: '.5rem', 
+                 backgroundColor: '#9d2053',
+                 color: '#fff',
+                 margin: '2rem 5rem 1rem 5rem'
+                }}
+            >
+              Entrar
+              <LoginIcon />
+            </Button>
+
+            <span>ou entre com rede social</span>
+
+            <div style={{
+              display: 'flex',
+              gap: '1rem',
+              justifyContent: 'center',
+              width: '100%',
+              padding: '1rem 5rem 1rem 5rem'
+            }}>
+              <IconButton
+                size="large"
+                color="inherit"
+              >
+                <GoogleIcon fontSize="large"/>
+              </IconButton>
+
+              <IconButton
+                size="large"
+                color="inherit"
+              >
+                <InstagramIcon fontSize="large"/>
+              </IconButton>
+
+              <IconButton
+                size="large"
+                color="inherit"
+              >
+                <XIcon fontSize="large"/>
+              </IconButton>
+            </div>
+
+            <hr 
+              style={{
+                color:'grey',
+                background: 'grey',
+                outline: 'none',
+                height: '1px',
+                border: 'none',
+                margin: '0.5rem 5rem'
+              }}
+            />
+
+            <span 
+              style={{display: 'flex',width: 'fit-content',
+                alignSelf: 'flex-end', padding: '.5rem 5rem', gap: '.5rem'}}>Ainda não tem conta? <p style={{
+              color: '#9d2053',
+              cursor: 'pointer', }}>Cadastrar</p></span>
+          </div>
+      </Popup>
     </Box>
   );
 }
