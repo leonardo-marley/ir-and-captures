@@ -286,10 +286,6 @@ export default function Home() {
           <div className={styles.containerConteudo}>
             <div className={styles.containerHome}>
               <h1>Home</h1>
-              <Loading 
-                width={100}
-                height={100}
-              />
             </div>
           </div>
         );
@@ -554,6 +550,12 @@ export default function Home() {
                       :
                         <input disabled type="text" value={`Carregando...`} />
                     }
+                  </div>
+                  <div className={styles.cardsDownloads}>
+                    <Loading
+                      width={100}
+                      height={100}
+                    />
                   </div>
                 </div>
               </div>
