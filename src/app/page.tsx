@@ -13,6 +13,8 @@ import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import GradientIcon from '@mui/icons-material/Gradient';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import TollIcon from '@mui/icons-material/Toll';
 import Fab from '@mui/material/Fab';
@@ -23,6 +25,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import LayersIcon from '@mui/icons-material/Layers';
 import SendIcon from '@mui/icons-material/Send';
 import Loading from "./components/Loading";
+import CardsDownload from "./components/CardsDownload";
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -266,8 +269,8 @@ export default function Home() {
     }
   
     return (
-      <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center', minHeight: '36px' }}>
-        <IconComponent style={{ marginRight: '8px' }} />
+      <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center', minHeight: '36px' }} onClick={() => console.log(option.label)}>
+        <IconComponent style={ option.label !== 'Amps' ? { marginRight: '8px' } : { marginRight: '8px', transform: 'rotate(180deg)'}} />
         {option.label}
       </div>
     );
@@ -424,8 +427,8 @@ export default function Home() {
 
                   <hr 
                     style={{
-                      color:'grey',
-                      background: 'grey',
+                      color:'#ccc',
+                      background: '#ccc',
                       outline: 'none',
                       height: '1px',
                       border: 'none',
@@ -552,11 +555,38 @@ export default function Home() {
                     }
                   </div>
                   <div className={styles.cardsDownloads}>
-                    <Loading
+                    {/* <Loading
                       width={100}
                       height={100}
-                    />
+                    /> */}
+                    <CardsDownload />
+                    <CardsDownload />
+                    <CardsDownload />
+                    <CardsDownload />
                   </div>
+                  <Stack spacing={2} >
+                    <Pagination 
+                      count={10} 
+                      shape="rounded" 
+                      size='large' 
+                      sx={{
+                        display: 'flex',
+                        alignSelf: 'flex-end',
+                        '& .Mui-selected': {
+                          backgroundColor: '#9d2053',
+                          color: '#fff',
+                          '&:hover': {
+                            backgroundColor: '#9d205380', // Cor opaca no hover
+                          },
+                        },
+                        '& .MuiPaginationItem-root': {
+                          '&:hover': {
+                            backgroundColor: '#9d205380', // Hover para outros itens
+                          },
+                        },
+                      }}
+                    />
+                  </Stack>
                 </div>
               </div>
             </div>
