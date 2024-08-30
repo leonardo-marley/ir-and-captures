@@ -1,0 +1,89 @@
+.cardContainer {
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr .7fr;
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #341931;
+    position: relative;
+}
+
+.cardContainer:hover {
+    border: 1px solid #9d2053;
+    -webkit-box-shadow: inset 0px 0px 5px 1px rgba(157,32,83,1);
+    -moz-box-shadow: inset 0px 0px 5px 1px rgba(157,32,83,1);
+    box-shadow: inset 0px 0px 5px 1px rgba(157,32,83,1);
+}
+
+.cardHeader {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    padding: .8rem;
+    background-color: #341931;
+    color: #fff;
+    font-weight: 500;
+    justify-content: space-between;
+}
+
+.cardContent{
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    border: 1px solid #341931;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.cardButtons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+}
+
+.cardButtons > button{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #341931;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: .5rem;
+    background-color: transparent;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, .30196078431372547);
+    font-weight: 600;
+    transition: none;
+}
+
+.cardButtons > button:hover{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: .5rem;
+    background-color: transparent;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, .30196078431372547);
+    font-weight: 600;
+    color:#9d2053;
+    transform: scale(1.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.cardFooter {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: .5rem;
+    background-color: #341931;
+    color: #fff;
+    font-weight: 500;
+    justify-content: space-between;
+    font-size: small;
+}

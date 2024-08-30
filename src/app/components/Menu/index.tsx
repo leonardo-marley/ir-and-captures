@@ -363,7 +363,7 @@ export default function Menu() {
               <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
               <CssTextField 
                 id="input-with-sx" 
-                label="Email" 
+                label="Usuário ou email" 
                 variant="standard" 
                 sx={{width: '100%'}}
               />
@@ -453,8 +453,8 @@ export default function Menu() {
 
             <hr 
               style={{
-                color:'grey',
-                background: 'grey',
+                color:'#ccc',
+                background: '#ccc',
                 outline: 'none',
                 height: '1px',
                 border: 'none',
