@@ -573,7 +573,7 @@ export default function Home() {
                         display: 'flex',
                         alignSelf: 'flex-end',
                         '& .Mui-selected': {
-                          backgroundColor: '#9d2053',
+                          backgroundColor: '#9d2053 !important',
                           color: '#fff',
                           '&:hover': {
                             backgroundColor: '#9d205380', // Cor opaca no hover
