@@ -1,0 +1,49 @@
+.containerDownloads {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+} 
+
+.containerDownloads > h1 {
+    margin-top: 1rem;
+}
+
+.pageDownloads {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    width: 100%;
+    height: 100%;
+}
+
+.sideBarDownloads {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.downloads {
+    display: grid;
+    padding: 1rem;
+    grid-template-rows: auto 1fr;
+}
+
+.topBarDownloads{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 3fr 1fr;
+    gap: 1rem;
+}
+
+.cardsDownloads{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 1rem 0;
+    gap: 1rem;
+    min-height: 80vh;
+}
