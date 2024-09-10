@@ -22,36 +22,22 @@ export default function Rodape() {
         <footer className={styles.rodape}>
           <div className={styles.container}>
             <div className={styles.colunaContato}>
-                <nav>
-                  <p className={styles.contato} >Home</p>
-                </nav>
-                <nav>
-                  <p className={styles.contato}>Downloads</p>
-                </nav>
-                <nav>
-                  <p className={styles.contato}>Contato</p>
-                </nav>
-                <nav>
-                  <p className={styles.contato}>Sobre</p>
-                </nav>
+                <nav className={styles.contato} >Home </nav>
+                <nav className={styles.contato}>Downloads </nav>
+                <nav className={styles.contato}>Contato </nav>
+                <nav className={styles.contato}>Sobre </nav>
               </div>
             <div className={styles.coluna}>
               {/* <h2>Redes Sociais</h2> */}
-                <span>
-                  <p className={styles.redes} >< FacebookIcon/> 
-                  </p>
+                <span className={styles.redes} >< FacebookIcon/> 
                 </span>
-                <span>
-                  <p className={styles.redes} >< InstagramIcon /> 
-                  </p>
+                <span className={styles.redes} >< InstagramIcon />
                 </span>
-                <span>
-                  <p className={styles.redes} >< XIcon /> 
-                  </p>
+                <span className={styles.redes} >< XIcon /> 
                 </span>
             </div>
               <div className={styles.direitos}>
-                <p>Copyright &copy; 2024 IR and Captures</p>
+                <span>Copyright &copy; 2024 IR and Captures</span>
               </div>
           </div>
         </footer>

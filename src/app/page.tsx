@@ -26,6 +26,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import SendIcon from '@mui/icons-material/Send';
 import Loading from "./components/Loading";
 import CardsDownload from "./components/CardsDownload";
+import Caroussel  from "./components/Caroussel";
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -288,7 +289,7 @@ export default function Home() {
         return (
           <div className={styles.containerConteudo}>
             <div className={styles.containerHome}>
-              <h1>Home</h1>
+              <Caroussel/>
             </div>
           </div>
         );

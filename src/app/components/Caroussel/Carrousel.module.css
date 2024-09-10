@@ -1,0 +1,23 @@
+/* Start Bootstrap carousel */
+.itemP {
+    height: calc(22rem + 2vw);
+  }
+  .itemP > img {
+    width: 95vw;
+    min-width: 45ch;
+    object-fit: cover;
+    height: 100%;
+    border-radius: 1rem;
+  }
+  
+  .caption {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+  }
+  
+  .caption h3 {
+    font-size: 35px;
+    color: rgb(255, 255, 255);
+  }
+  /* End Bootstrap carousel */
+  
