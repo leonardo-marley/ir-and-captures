@@ -19,9 +19,17 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import LayersIcon from '@mui/icons-material/Layers';
 import Loading from "./../Loading";
 import CardsDownload from "./../CardsDownload";
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
 
 interface DownloadInnerProps {
   pesquisa?: string;
+}
+
+interface SelectOption {
+  label: string;
+  value: number; 
 }
 
 export default function DownloadInner(props: DownloadInnerProps) {
@@ -107,6 +115,249 @@ export default function DownloadInner(props: DownloadInnerProps) {
       value: 2
     }
   ]
+
+  const cardArquivos: any = [
+    {
+      codigo: 1,
+      dataUpload: '08/09/2024',
+      loginCriador: 'start789',
+      nome: 'Vintage Monster Tube Overdrive VT999',
+      cCategoria: 2,
+      categoriaNome: 'Pedal',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 12,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 2,
+      dataUpload: '18/07/2024',
+      loginCriador: 'cleitinho',
+      nome: 'Vintage Monster Tube Overdrive VT999',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: '',
+      cPlataforma: 0,
+      genero: 2,
+      textura: 3,
+      qtdArquivos: 15,
+      likes: 22,
+      qtdDownloads: 17,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 3,
+      dataUpload: '23/07/2024',
+      loginCriador: 'scoob',
+      nome: 'Crate GX-65 (Palmer Macht402 Power Amp)',
+      cCategoria: 4,
+      categoriaNome: 'Amps',
+      nomePlataforma: 'PROTEUS',
+      cPlataforma: 3,
+      genero: 3,
+      textura: 4,
+      qtdArquivos: 16,
+      likes: 15,
+      qtdDownloads: 11,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 4,
+      dataUpload: '11/09/2024',
+      loginCriador: 'start789',
+      nome: 'Browne Dual Protein Overdrive',
+      cCategoria: 2,
+      categoriaNome: 'Pedal',
+      nomePlataforma: 'AIDA-X',
+      cPlataforma: 1,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 9,
+      likes: 17,
+      qtdDownloads: 12,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 5,
+      dataUpload: '08/09/2024',
+      loginCriador: 'start789',
+      nome: 'Vintage Monster Tube Overdrive VT999',
+      cCategoria: 2,
+      categoriaNome: 'Pedal',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 6,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 7,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 8,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 9,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 10,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 11,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 12,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 13,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 14,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 15,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+  ]
   const [classificacaoDownloads, setClassificacaoDownloads] = useState('todos');
   const [plataformasDownload, setPlataformasDownload] = useState(pataformas);
   const [selectedPlataformas, setSelectedPlataformas] = useState<any[]>([]);
@@ -115,9 +366,59 @@ export default function DownloadInner(props: DownloadInnerProps) {
   const [texturaDownload, setTexturaDownload] = useState(textura);
   const [selectedTextura, setSelectedTextura] = useState<any[]>([]);
   const [categoriasDownload, setCategoriasDownload] = useState(categorias);
-  const [selectedCategoria, setSelectedCategoria] = useState<any[]>([]);
+  const [selectedCategoria, setSelectedCategoria] = useState<SelectOption>();
   const [ordenacaoDownload, setOrdenacaoDownload] = useState(ordenacao);
-  const [selectedOrdenacao, setSelectedOrdenacao] = useState<any[]>([]);
+  const [selectedOrdenacao, setSelectedOrdenacao] = useState<SelectOption>();
+  const [arquivos, setArquivos] = useState<any[]>(cardArquivos);
+  const [arquivosFiltrados, setArquivosFiltrados] = useState<any>();
+  const [page, setPage] = useState(1); 
+  const itemsPerPage = 12;
+  dayjs.extend(customParseFormat);
+
+  useEffect(() => {
+    let arquivosFiltradosTemp = [...arquivos]; 
+
+    // Filtra pela categoria selecionada
+    if (selectedCategoria && selectedCategoria.value !== 1) {
+      arquivosFiltradosTemp = arquivosFiltradosTemp.filter(
+        (item) => item.cCategoria === selectedCategoria.value 
+      );
+    }
+
+    // Filtra por classificação (downloads ou likes)
+    if (classificacaoDownloads === 'emalta') {
+      arquivosFiltradosTemp = arquivosFiltradosTemp
+        .filter(item => item.qtdDownloads > 10) // Filtra os com mais de 10 downloads
+        .sort((a, b) => b.qtdDownloads - a.qtdDownloads); 
+    } else if (classificacaoDownloads === 'popular') {
+      arquivosFiltradosTemp = arquivosFiltradosTemp
+        .filter(item => item.likes > 10) // Filtra os com mais de 10 likes
+        .sort((a, b) => b.likes - a.likes); 
+    }
+
+    // Verificação de ordenação
+    if (selectedOrdenacao && selectedOrdenacao.value === 1) {
+      arquivosFiltradosTemp.sort((a, b) => {
+        const dateA = dayjs(a.dataUpload, 'DD/MM/YYYY', true); 
+        const dateB = dayjs(b.dataUpload, 'DD/MM/YYYY', true); 
+        if (!dateA.isValid() || !dateB.isValid()) {
+          return 0;
+        }
+        return dateB.diff(dateA);
+      });
+    } else if (selectedOrdenacao && selectedOrdenacao.value === 2) {
+      arquivosFiltradosTemp.sort((a, b) => {
+        const dateA = dayjs(a.dataUpload, 'DD/MM/YYYY', true); 
+        const dateB = dayjs(b.dataUpload, 'DD/MM/YYYY', true);
+        if (!dateA.isValid() || !dateB.isValid()) {
+          return 0;
+        }
+        return dateA.diff(dateB);
+      });
+    }
+
+    setArquivosFiltrados(arquivosFiltradosTemp); 
+  }, [classificacaoDownloads, arquivos, selectedCategoria, selectedOrdenacao]);
 
   useEffect(() => {
     if (categoriasDownload && categoriasDownload.length > 0) {
@@ -225,11 +526,22 @@ export default function DownloadInner(props: DownloadInnerProps) {
     }
   
     return (
-      <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center', minHeight: '36px' }} onClick={() => console.log(option.label)}>
+      <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center', minHeight: '36px' }} >
         <IconComponent style={ option.label !== 'Amps' ? { marginRight: '8px' } : { marginRight: '8px', transform: 'rotate(180deg)'}} />
         {option.label}
       </div>
     );
+  };
+
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const currentItems = arquivosFiltrados?.slice(startIndex, endIndex);
+
+  const totalPages = Math.ceil(arquivosFiltrados?.length / itemsPerPage);
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
   };
 
   return (
@@ -238,7 +550,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
       <div className={styles.pageDownloads}>
         <div className={styles.sideBarDownloads}>
           <Fab
-            onClick={() => handleClassificacaoDownload('todos')}
+            onClick={() => {handleClassificacaoDownload('todos'); setPage(1);}}
             color="inherit"
             sx={ classificacaoDownloads !== 'todos' ? {'&:hover': {
               backgroundColor: '#9d2053',
@@ -282,7 +594,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
           </Fab>
 
           <Fab
-            onClick={() => handleClassificacaoDownload('emalta')}
+            onClick={() => {handleClassificacaoDownload('emalta'); setPage(1);}}
             color="inherit"
             sx={ classificacaoDownloads !== 'emalta' ? {'&:hover': {
               backgroundColor: '#9d2053',
@@ -326,7 +638,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
           </Fab>
 
           <Fab
-            onClick={() => handleClassificacaoDownload('popular')}
+            onClick={() => {handleClassificacaoDownload('popular'); setPage(1);}}
             color="inherit"
             sx={ classificacaoDownloads !== 'popular' ? {'&:hover': {
               backgroundColor: '#9d2053',
@@ -474,7 +786,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
                   isClearable
                   isSearchable
                   options={categoriasDownload}
-                  onChange={(e) => setSelectedCategoria(e)}
+                  onChange={(e) => {setSelectedCategoria(e); setPage(1);}}
                   defaultValue={categoriasDownload[0]}
                   value={selectedCategoria}
                   styles={customStyles}
@@ -489,7 +801,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
                   className={styles.select} 
                   isLoading={!ordenacaoDownload}  
                   options={ordenacaoDownload}
-                  onChange={(e) => setSelectedOrdenacao(e)}
+                  onChange={(e:any) => {setSelectedOrdenacao(e); setPage(1);}}
                   value={selectedOrdenacao}
                   styles={customStyles}
                   components={{ DropdownIndicator }}
@@ -498,19 +810,38 @@ export default function DownloadInner(props: DownloadInnerProps) {
                 <input disabled type="text" value={`Carregando...`} />
             }
           </div>
-          <div className={styles.cardsDownloads}>
-            {/* <Loading
-              width={100}
-              height={100}
-            /> */}
-            <CardsDownload />
-            <CardsDownload />
-            <CardsDownload />
-            <CardsDownload />
+          <div className={styles.cardsDownloads} >
+            { arquivosFiltrados ?
+              currentItems.map((item:any) => (
+                <CardsDownload
+                  key={item.codigo}
+                  codigo={item.codigo}
+                  dataUpload={item.dataUpload}
+                  loginCriador={item.loginCriador}
+                  nome={item.nome}
+                  cCategoria={item.cCategoria}
+                  categoriaNome={item.categoriaNome}
+                  nomePlataforma={item.nomePlataforma}
+                  cPlataforma={item.cPlataforma}
+                  genero={item.genero}
+                  textura={item.textura}
+                  qtdArquivos={item.qtdArquivos}
+                  likes={item.likes}
+                  qtdDownloads={item.qtdDownloads}
+                />
+              ))
+              :
+              <Loading
+                width={100}
+                height={100}
+              />
+            }
           </div>
           <Stack spacing={2} >
             <Pagination 
-              count={10} 
+              count={totalPages} 
+              page={page} 
+              onChange={handlePageChange} 
               shape="rounded" 
               size='large' 
               sx={{
