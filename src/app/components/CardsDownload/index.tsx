@@ -4,13 +4,28 @@
 
 import { useEffect, useState } from "react";
 import styles from "./cardsDownload.module.css";
+import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import GradientIcon from '@mui/icons-material/Gradient';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 
 interface CardsProps {
     codigo?: number,
-    nome?: string
+    dataUpload?: string,
+    loginCriador?: string,
+    nome?: string,
+    cCategoria?: number,
+    categoriaNome?: string,
+    nomePlataforma?: string,
+    cPlataforma?: number,
+    genero?: number,
+    textura?: number,
+    qtdArquivos?: number,
+    likes?: number,
+    qtdDownloads?: number,
+    downloadURL?: string
 }
 
 export default function CardsDownload(props: CardsProps) {
@@ -20,6 +35,35 @@ export default function CardsDownload(props: CardsProps) {
     setIsClient(true);
   }, [])
 
+  function Icon({ codigo }: any) {
+    switch (codigo) {
+      case 1:
+        return (
+          <GraphicEqIcon sx={{color: '#fff'}}/>
+        );
+      case 2:
+        return (
+          <GradientIcon sx={{color: '#fff'}}/>
+        );
+      case 3:
+        return (
+          <ShowChartIcon sx={{color: '#fff'}}/>
+        );
+      case 4:
+        return (
+          <CreditCardIcon sx={{color: '#fff',transform: 'rotate(180deg)'}}/>
+        );
+      case 5:
+        return (
+          <GraphicEqIcon sx={{color: '#fff'}}/>
+        );
+      default:
+        return (
+          <GraphicEqIcon sx={{color: '#fff'}}/>
+        );
+    }
+  }
+
   return (
     <>
       { isClient &&
@@ -27,13 +71,13 @@ export default function CardsDownload(props: CardsProps) {
             className={styles.cardContainer}
         >
             <div className={styles.cardHeader}>
-                <p style={{display: 'flex', alignItems: 'center', gap: '.5rem'}}><GradientIcon sx={{color: '#fff'}}/><b>Pedal</b></p>
-                <p>12 Modelos</p>
+                <p style={{display: 'flex', alignItems: 'center', gap: '.5rem'}}><Icon codigo={props.cCategoria}/><b>{props.categoriaNome}</b></p>
+                <p>{props.qtdArquivos} Arquivos</p>
             </div>
 
             <div className={styles.cardContent}>
-                <h2>Browne Dual Protein Overdrive</h2>
-                <div 
+                <h3>{props.nome}</h3>
+                {props?.nomePlataforma !== '' && <div 
                     style={{
                         display: 'flex', 
                         borderRadius: 50, 
@@ -44,17 +88,24 @@ export default function CardsDownload(props: CardsProps) {
                         fontSize: '11px', 
                         marginTop: '.5rem'
                     }}
-                >NAM</div>
+                >{props.nomePlataforma}</div>}
             </div>
 
             <div className={styles.cardButtons}>
-                <button><ThumbUpAltIcon className={styles.icon}/><p>2</p></button>
-                <button><FileDownloadRoundedIcon className={styles.icon}/><p>12</p></button>
+                <button><ThumbUpAltIcon className={styles.icon}/><p>{props.likes}</p></button>
+                <button >
+                  <a href={`https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq`}>
+                    <FileDownloadRoundedIcon 
+                      className={styles.icon}
+                    />
+                      <p>{props.qtdDownloads}</p>
+                  </a>
+                </button>
             </div>
 
             <div className={styles.cardFooter}>
-                <p>start789</p>
-                <p>2 dias atrás</p>
+                <p>{props.loginCriador}</p>
+                <p>{props.dataUpload}</p>
             </div>
         </main>
       }
