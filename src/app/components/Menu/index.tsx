@@ -166,7 +166,7 @@ export default function Menu() {
         </IconButton>
         <p>Downloads</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem style={{display: 'none'}}>
         <IconButton
           size="large"
           color="inherit"
@@ -260,7 +260,7 @@ export default function Menu() {
                 backgroundColor: '#341931'
               }
             : {
-                fontWeight: '600', '&:hover': {
+                fontWeight: '600', display: 'none', '&:hover': {
                   backgroundColor: '#341931',
                 },
               }} onClick={() => handleMenuClick(3)}>
