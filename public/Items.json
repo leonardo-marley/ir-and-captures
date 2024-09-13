@@ -3,38 +3,31 @@
       "bootstrap": [
         {
           "id": 1,
-          "title": "PEDAIZINHOS",
-          "body": "Bootstrap Carousel Example",
-          "imageUrl": "./banner.png",
-          "docs": "https://getbootstrap.com/docs/4.0/components/carousel/"
-        },
-        {
-          "id": 2,
-          "title": "Lagoa Velha",
+          "title": "Descubra Novos Sons e Colabore",
           "body": "Bootstrap Carousel Example",
           "imageUrl": "./fundoSobre.png",
           "docs": "https://getbootstrap.com/docs/4.0/components/carousel/"
         },
         {
-          "id": 3,
-          "title": "Gruta do Acaiá",
+          "id": 2,
+          "title": "Descubra Novos Sons e Colabore",
           "body": "Bootstrap Carousel Example",
-          "imageUrl": "https://images.prismic.io/incriveisexperiencias/b790c994-1d08-4625-8261-7b37d2721408_123655945_275703453858904_4122035702339885207_n.jpg?auto=compress,format",
+          "imageUrl": "./Banner1.jpg",
+          "docs": "https://getbootstrap.com/docs/4.0/components/carousel/"
+        },
+        {
+          "id": 3,
+          "title": "Descubra Novos Sons e Colabore",
+          "body": "Bootstrap Carousel Example",
+          "imageUrl": "./Banner2.jpg",
           "docs": "https://getbootstrap.com/docs/4.0/components/carousel/"
         },
         {
           "id": 4,
-          "title": "Lagoa Azul",
+          "title": "Descubra Novos Sons e Colabore",
           "body": "Bootstrap Carousel Example",
-          "imageUrl": "https://live.staticflickr.com/8304/8007983077_cb4bfa5c5f_b.jpg",
+          "imageUrl": "./banner.png",
           "docs": "https://getbootstrap.com/docs/4.0/components/carousel/"
-        },
-        {
-          "id": 5,
-          "title": "Lopes Mendes",
-          "body": "Bootstrap Carousel Example",
-          "imageUrl": "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/262000/262473-Southeast-Region-Brazil.jpg",
-          "docs": "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/262000/262473-Southeast-Region-Brazil.jpg"
         }
       ],
       "elastic": [

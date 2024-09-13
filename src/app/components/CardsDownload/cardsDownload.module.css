@@ -38,6 +38,10 @@
     padding: 1rem;
 }
 
+.cardContent > h3 {
+    text-align: center;
+}
+
 .cardButtons{
     display: grid;
     grid-template-columns: 1fr 1fr;
