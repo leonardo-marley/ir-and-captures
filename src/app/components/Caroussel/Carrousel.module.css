@@ -1,13 +1,13 @@
 /* Start Bootstrap carousel */
 .itemP {
-    height: calc(22rem + 2vw);
+    height: calc(26rem + 2vw);
   }
   .itemP > img {
     width: 95vw;
     min-width: 45ch;
     object-fit: cover;
     height: 100%;
-    border-radius: 1rem;
+    border-radius: 6px;
   }
   
   .caption {
