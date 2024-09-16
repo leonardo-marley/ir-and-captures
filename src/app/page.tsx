@@ -35,6 +35,7 @@ export default function Home() {
   }
 
   const cMenu = searchParams.get('cMenu');
+  const pesquisa = searchParams.get('pesquisa');
 
   interface PageInnerProps {
     cMenuUrl: number;
@@ -51,7 +52,7 @@ export default function Home() {
       case 2:
         return (
           <div className={styles.containerConteudo}>
-            <DownloadInner pesquisa=""/>
+            <DownloadInner pesquisa={pesquisa?.toString()}/>
           </div>
         );
       case 3:
@@ -82,7 +83,11 @@ export default function Home() {
   return (
     <main className={styles.main} onClick={() => console.log(typeof cMenu)}>
       <Menu />
-      { cMenu && <PageInner cMenuUrl={parseInt(cMenu)} />}
+      { (cMenu && !pesquisa) ?
+          <PageInner cMenuUrl={parseInt(cMenu)} />
+        :
+          <PageInner cMenuUrl={2} />
+      }
       <Rodape />
     </main>
   );

@@ -199,7 +199,7 @@ export default function HomeInner() {
               padding: '.5rem 2rem'
               }}
           >
-            Ver Mais
+            <a href="#Menu">Ver Mais</a>
           </Fab>
         </div>
 

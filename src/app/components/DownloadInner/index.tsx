@@ -378,6 +378,16 @@ export default function DownloadInner(props: DownloadInnerProps) {
   useEffect(() => {
     let arquivosFiltradosTemp = [...arquivos]; 
 
+    // Filtra pela pesquisa, se props.pesquisa existir
+    if (props.pesquisa) {
+      const pesquisaLower = props.pesquisa.toLowerCase();
+      arquivosFiltradosTemp = arquivosFiltradosTemp.filter(
+        (item) =>
+          item.loginCriador?.toLowerCase().includes(pesquisaLower) ||
+          item.nome?.toLowerCase().includes(pesquisaLower)
+      );
+    }
+
     // Filtra pela categoria selecionada
     if (selectedCategoria && selectedCategoria.value !== 1) {
       arquivosFiltradosTemp = arquivosFiltradosTemp.filter(
@@ -418,7 +428,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
     }
 
     setArquivosFiltrados(arquivosFiltradosTemp); 
-  }, [classificacaoDownloads, arquivos, selectedCategoria, selectedOrdenacao]);
+  }, [classificacaoDownloads, arquivos, selectedCategoria, selectedOrdenacao, props.pesquisa]);
 
   useEffect(() => {
     if (categoriasDownload && categoriasDownload.length > 0) {
@@ -810,6 +820,11 @@ export default function DownloadInner(props: DownloadInnerProps) {
                 <input disabled type="text" value={`Carregando...`} />
             }
           </div>
+
+          { props.pesquisa &&
+            <p style={{marginTop: '1rem', fontSize: 'medium'}}>Resultado de pesquisa por: <b>{props.pesquisa}</b></p>
+          }
+
           <div className={styles.cardsDownloads} >
             { arquivosFiltrados ?
               currentItems.map((item:any) => (
@@ -830,11 +845,13 @@ export default function DownloadInner(props: DownloadInnerProps) {
                   qtdDownloads={item.qtdDownloads}
                 />
               ))
-              :
-              <Loading
-                width={100}
-                height={100}
-              />
+              : (currentItems?.length === 0 && props.pesquisa) ?
+                <h3>Desculpe, não encontamos nenhum resultado.</h3>
+                :
+                  <Loading
+                    width={100}
+                    height={100}
+                  />
             }
           </div>
           <Stack spacing={2} >
