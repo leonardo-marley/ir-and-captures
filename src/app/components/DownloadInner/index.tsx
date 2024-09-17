@@ -12,6 +12,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import TollIcon from '@mui/icons-material/Toll';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
 import Fab from '@mui/material/Fab';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -825,8 +826,16 @@ export default function DownloadInner(props: DownloadInnerProps) {
             <p style={{marginTop: '1rem', fontSize: 'medium'}}>Resultado de pesquisa por: <b>{props.pesquisa}</b></p>
           }
 
-          <div className={styles.cardsDownloads} >
-            { arquivosFiltrados ?
+          <div className={styles.cardsDownloads} 
+            style={currentItems?.length === 0 ?{
+              display: 'flex',
+              width: '100%',
+              height: '100%',
+              justifyContent: 'center',
+              textWrap: 'nowrap'
+            }:{}}
+          >
+            { currentItems?.length > 0 ?
               currentItems.map((item:any) => (
                 <CardsDownload
                   key={item.codigo}
@@ -845,8 +854,21 @@ export default function DownloadInner(props: DownloadInnerProps) {
                   qtdDownloads={item.qtdDownloads}
                 />
               ))
-              : (currentItems?.length === 0 && props.pesquisa) ?
-                <h3>Desculpe, não encontamos nenhum resultado.</h3>
+              : (props.pesquisa) ?
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    height: '100%',
+                    justifyContent: 'center',
+                    justifyItems: 'center',
+                    alignItems: 'center'
+                  }}
+                >
+                  <SearchOffIcon sx={{fontSize: "8rem"}}/>
+                  <h4>Desculpe, não encontamos nenhum resultado.</h4>
+                </div>
                 :
                   <Loading
                     width={100}

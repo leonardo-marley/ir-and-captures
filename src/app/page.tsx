@@ -81,7 +81,7 @@ export default function Home() {
   }
 
   return (
-    <main className={styles.main} onClick={() => console.log(typeof cMenu)}>
+    <main className={styles.main} >
       <Menu />
       { (cMenu && !pesquisa) ?
           <PageInner cMenuUrl={parseInt(cMenu)} />
