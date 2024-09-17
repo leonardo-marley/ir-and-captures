@@ -102,6 +102,7 @@ export default function Menu() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [showPassword, setShowPassword] = React.useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -127,6 +128,21 @@ export default function Menu() {
 
   const handleMenuClick = (codigo: number) => {
     router.push(`${pathname}?cMenu=${codigo}`, { scroll: false })
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+
+    const params = new URLSearchParams(searchParams);
+
+    if (value) {
+      params.set('pesquisa', value); 
+    } else {
+      params.delete('pesquisa'); 
+    }
+
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const menuId = 'primary-search-account-menu';
@@ -209,7 +225,7 @@ export default function Menu() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} id='Menu'>
       <AppBar position="static" sx={{height: '100px', backgroundColor: '#571b3c'}}>
         <Toolbar sx={{height: '100px'}}>
           <Image
@@ -220,12 +236,14 @@ export default function Menu() {
             className={styles.imgLogo}
           />
           <Search>
-            <SearchIconWrapper>
+            <SearchIconWrapper >
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Procurar…"
               inputProps={{ 'aria-label': 'search' }}
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
