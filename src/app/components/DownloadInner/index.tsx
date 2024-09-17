@@ -142,7 +142,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
       cCategoria: 3,
       categoriaNome: 'IRs',
       nomePlataforma: '',
-      cPlataforma: 0,
+      cPlataforma: -1,
       genero: 2,
       textura: 3,
       qtdArquivos: 15,
@@ -372,6 +372,8 @@ export default function DownloadInner(props: DownloadInnerProps) {
   const [selectedOrdenacao, setSelectedOrdenacao] = useState<SelectOption>();
   const [arquivos, setArquivos] = useState<any[]>(cardArquivos);
   const [arquivosFiltrados, setArquivosFiltrados] = useState<any>();
+  const [arquivosFiltradosAutomatizados, setArquivosFiltradosAutomatizados] = useState<any>();
+  const [filtrar, setFiltrar] = useState(false);
   const [page, setPage] = useState(1); 
   const itemsPerPage = 12;
   dayjs.extend(customParseFormat);
@@ -428,8 +430,49 @@ export default function DownloadInner(props: DownloadInnerProps) {
       });
     }
 
+    if (selectedPlataformas || selectedGeneros || selectedTextura) {
+      arquivosFiltradosTemp = aplicarFiltrosExtras(arquivosFiltradosTemp);
+    }
+
     setArquivosFiltrados(arquivosFiltradosTemp); 
-  }, [classificacaoDownloads, arquivos, selectedCategoria, selectedOrdenacao, props.pesquisa]);
+  }, [classificacaoDownloads, arquivos, selectedCategoria, selectedOrdenacao, props.pesquisa,filtrar]);
+
+  const aplicarFiltrosExtras = (arquivosFiltradosTemp: any) => {
+    // Filtra por plataformas
+    if (selectedPlataformas && selectedPlataformas.length > 0) {
+      arquivosFiltradosTemp = arquivosFiltradosTemp.filter((item:any) =>
+        selectedPlataformas.some((plataforma) => item.cPlataforma === plataforma.value)
+      );
+    }
+  
+    // Filtra por gêneros
+    if (selectedGeneros && selectedGeneros.length > 0) {
+      arquivosFiltradosTemp = arquivosFiltradosTemp.filter((item:any) =>
+        selectedGeneros.some((genero) => item.genero === genero.value)
+      );
+    }
+  
+    // Filtra por texturas
+    if (selectedTextura && selectedTextura.length > 0) {
+      arquivosFiltradosTemp = arquivosFiltradosTemp.filter((item:any) =>
+        selectedTextura.some((textura) => item.textura === textura.value)
+      );
+    }
+  
+    return arquivosFiltradosTemp;
+  };
+  
+  const handleFiltrarClick = () => {
+    let arquivosFiltradosTemp = [...arquivosFiltrados];
+
+    setFiltrar(!filtrar);
+    
+    // Aplique os filtros extras ao clicar no botão
+    arquivosFiltradosTemp = aplicarFiltrosExtras(arquivosFiltradosTemp);
+  
+    // Atualize o estado com os arquivos filtrados
+    setArquivosFiltrados(arquivosFiltradosTemp);
+  };
 
   useEffect(() => {
     if (categoriasDownload && categoriasDownload.length > 0) {
@@ -544,6 +587,10 @@ export default function DownloadInner(props: DownloadInnerProps) {
     );
   };
 
+  useEffect(() => {
+    setPage(1); // Sempre que o filtro for aplicado, a página volta para primeira
+  }, [arquivosFiltrados]);
+
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -561,7 +608,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
       <div className={styles.pageDownloads}>
         <div className={styles.sideBarDownloads}>
           <Fab
-            onClick={() => {handleClassificacaoDownload('todos'); setPage(1);}}
+            onClick={() => {handleClassificacaoDownload('todos');}}
             color="inherit"
             sx={ classificacaoDownloads !== 'todos' ? {'&:hover': {
               backgroundColor: '#9d2053',
@@ -605,7 +652,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
           </Fab>
 
           <Fab
-            onClick={() => {handleClassificacaoDownload('emalta'); setPage(1);}}
+            onClick={() => {handleClassificacaoDownload('emalta'); }}
             color="inherit"
             sx={ classificacaoDownloads !== 'emalta' ? {'&:hover': {
               backgroundColor: '#9d2053',
@@ -649,7 +696,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
           </Fab>
 
           <Fab
-            onClick={() => {handleClassificacaoDownload('popular'); setPage(1);}}
+            onClick={() => {handleClassificacaoDownload('popular');}}
             color="inherit"
             sx={ classificacaoDownloads !== 'popular' ? {'&:hover': {
               backgroundColor: '#9d2053',
@@ -768,7 +815,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
           }
 
           <Button
-            //onClick={handleProfileMenuOpen}
+            onClick={handleFiltrarClick}
             color="inherit"
             sx={{'&:hover': {
               backgroundColor: '#9d2053',
@@ -797,7 +844,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
                   isClearable
                   isSearchable
                   options={categoriasDownload}
-                  onChange={(e) => {setSelectedCategoria(e); setPage(1);}}
+                  onChange={(e) => {setSelectedCategoria(e); }}
                   defaultValue={categoriasDownload[0]}
                   value={selectedCategoria}
                   styles={customStyles}
@@ -812,7 +859,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
                   className={styles.select} 
                   isLoading={!ordenacaoDownload}  
                   options={ordenacaoDownload}
-                  onChange={(e:any) => {setSelectedOrdenacao(e); setPage(1);}}
+                  onChange={(e:any) => {setSelectedOrdenacao(e);}}
                   value={selectedOrdenacao}
                   styles={customStyles}
                   components={{ DropdownIndicator }}
@@ -826,7 +873,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
             <p style={{marginTop: '1rem', fontSize: 'medium'}}>Resultado de pesquisa por: <b>{props.pesquisa}</b></p>
           }
 
-          <div className={styles.cardsDownloads} 
+          <div className={styles.cardsDownloads} onClick={() => console.log(arquivosFiltrados)}
             style={currentItems?.length === 0 ?{
               display: 'flex',
               width: '100%',
@@ -854,7 +901,7 @@ export default function DownloadInner(props: DownloadInnerProps) {
                   qtdDownloads={item.qtdDownloads}
                 />
               ))
-              : (props.pesquisa) ?
+              : (props.pesquisa || selectedCategoria || selectedGeneros || selectedTextura) ?
                 <div
                   style={{
                     display: 'flex',
