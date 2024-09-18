@@ -10,9 +10,10 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface CardsProps {
-    codigo?: number,
+    codigo: number,
     dataUpload?: string,
     loginCriador?: string,
     nome?: string,
@@ -29,11 +30,18 @@ interface CardsProps {
 }
 
 export default function CardsDownload(props: CardsProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, [])
+
+  const handleMenuClick = (codigo: number) => {
+    router.push(`${pathname}/?cMenu=${searchParams.get('cMenu')}&cArquivo=${codigo}`, { scroll: false })
+  };
 
   function Icon({ codigo }: any) {
     switch (codigo) {
@@ -75,21 +83,25 @@ export default function CardsDownload(props: CardsProps) {
                 <p>{props.qtdArquivos} Arquivos</p>
             </div>
 
-            <div className={styles.cardContent}>
-                <h3>{props.nome}</h3>
-                {props?.nomePlataforma !== '' && <div 
-                    style={{
-                        display: 'flex', 
-                        borderRadius: 50, 
-                        backgroundColor: '#9d2053', 
-                        color: '#fff', 
-                        padding: '.3rem .5rem',
-                        width: 'fit-content', 
-                        fontSize: '11px', 
-                        marginTop: '.5rem'
-                    }}
-                >{props.nomePlataforma}</div>}
-            </div>
+            <a href="#Menu">
+              <div className={styles.cardContent}
+                onClick={() => handleMenuClick(props?.codigo)}
+              >
+                  <h3>{props.nome}</h3>
+                  {props?.nomePlataforma !== '' && <div 
+                      style={{
+                          display: 'flex', 
+                          borderRadius: 50, 
+                          backgroundColor: '#9d2053', 
+                          color: '#fff', 
+                          padding: '.3rem .5rem',
+                          width: 'fit-content', 
+                          fontSize: '11px', 
+                          marginTop: '.5rem'
+                      }}
+                  >{props.nomePlataforma}</div>}
+              </div>
+            </a>
 
             <div className={styles.cardButtons}>
                 <button><ThumbUpAltIcon className={styles.icon}/><p>{props.likes}</p></button>
