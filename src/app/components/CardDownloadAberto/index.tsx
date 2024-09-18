@@ -15,6 +15,9 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import CardPerfil from "../CardPerfil";
 import CardTags from "../CardTags";
+import { NotificationContainer , NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+
 
 export default function CardDownloadAberto() {
   const router = useRouter();
@@ -60,7 +63,7 @@ export default function CardDownloadAberto() {
   const copyUrlToClipboard = () => {
     if (navigator.clipboard && currentUrl) {
       navigator.clipboard.writeText(currentUrl).then(() => {
-        alert('Link Copiado!');
+        NotificationManager.success('Link Copiado!', 'Arquivo');
       }, (err) => {
         console.error('Falha ao copiar a URL: ', err);
       });
@@ -222,6 +225,8 @@ export default function CardDownloadAberto() {
         <p style={{ fontSize: 'large' }}><b>Lincença</b></p>
         <p ><b>IR and Captures:</b>&nbsp;&nbsp;Você pode baixar e carregar o arquivo de dados no software, além de usar ou publicar os resultados gerados por ele, sem precisar pagar nada. No entanto, não é permitido enviar, republicar ou distribuir o arquivo de dados sem a permissão expressa do autor.</p>
       </div>
+
+      <NotificationContainer /> 
     </div>
   );
 }
