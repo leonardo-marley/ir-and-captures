@@ -372,7 +372,6 @@ export default function DownloadInner(props: DownloadInnerProps) {
   const [selectedOrdenacao, setSelectedOrdenacao] = useState<SelectOption>();
   const [arquivos, setArquivos] = useState<any[]>(cardArquivos);
   const [arquivosFiltrados, setArquivosFiltrados] = useState<any>();
-  const [arquivosFiltradosAutomatizados, setArquivosFiltradosAutomatizados] = useState<any>();
   const [filtrar, setFiltrar] = useState(false);
   const [page, setPage] = useState(1); 
   const itemsPerPage = 12;

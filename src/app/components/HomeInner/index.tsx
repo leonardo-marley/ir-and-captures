@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import styles from "./HomeInner.module.css";
 import Caroussel  from "./../Caroussel/Index";
