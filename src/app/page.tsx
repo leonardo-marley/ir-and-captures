@@ -10,6 +10,7 @@ import DownloadInner from "./components/DownloadInner";
 import ComunidadeInner from "./components/ComunidadeInner";
 import SobreInner from "./components/SobreInner";
 import ContatoInner from "./components/ContatoInner";
+import CardDownloadAberto from "./components/CardDownloadAberto";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -35,6 +36,7 @@ export default function Home() {
   }
 
   const cMenu = searchParams.get('cMenu');
+  const cArquivo = searchParams.get('cArquivo');
   const pesquisa = searchParams.get('pesquisa');
 
   interface PageInnerProps {
@@ -83,10 +85,13 @@ export default function Home() {
   return (
     <main className={styles.main} >
       <Menu />
-      { (cMenu && !pesquisa) ?
+      { (cMenu && !pesquisa && !cArquivo) ?
           <PageInner cMenuUrl={parseInt(cMenu)} />
         :
-          <PageInner cMenuUrl={2} />
+          pesquisa ? 
+            <PageInner cMenuUrl={2} />
+          :
+          cMenu && <CardDownloadAberto />
       }
       <Rodape />
     </main>
