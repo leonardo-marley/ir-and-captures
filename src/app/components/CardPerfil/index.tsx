@@ -3,14 +3,19 @@ import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
-export default function CardPerfil() {
+interface CardPerfilProps {
+  nome: string,
+  urlImagem?: string
+}
+
+export default function CardPerfil(props: CardPerfilProps) {
   return (
     <Stack direction="row" spacing={1}>
       <Chip
         avatar={
           <Avatar 
-            alt="Natan" 
-            src="./Banner1.jpg" 
+            alt={props.nome} 
+            src={props.urlImagem} 
             style={{
               width: '50px',
               height: '50px',
@@ -20,7 +25,7 @@ export default function CardPerfil() {
             }}
           />
         }
-        label="Natan Lemos"
+        label={props.nome}
         variant="outlined"
         sx={{
           minWidth: '140px',

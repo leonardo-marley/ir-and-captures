@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./menu.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -130,19 +130,35 @@ export default function Menu() {
     router.push(`${pathname}?cMenu=${codigo}`, { scroll: false })
   };
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSearchTerm(value);
-
+  useEffect(() => {
     const params = new URLSearchParams(searchParams);
+  
+    if (!searchTerm) {
+      params.delete('pesquisa');
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    }
+  }, [searchTerm, pathname, searchParams, router]);
 
-    if (value) {
-      params.set('pesquisa', value); 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+  
+  const handleSearchSubmit = () => {
+    const params = new URLSearchParams(searchParams);
+  
+    if (searchTerm) {
+      params.set('pesquisa', searchTerm); 
     } else {
       params.delete('pesquisa'); 
     }
-
+  
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+  
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearchSubmit();
+    }
   };
 
   const menuId = 'primary-search-account-menu';
@@ -235,8 +251,8 @@ export default function Menu() {
             alt="Logo"
             className={styles.imgLogo}
           />
-          <Search>
-            <SearchIconWrapper >
+          <Search >
+            <SearchIconWrapper onClick={handleSearchSubmit} style={{cursor: 'pointer !important',zIndex: '2' }}>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
@@ -244,6 +260,11 @@ export default function Menu() {
               inputProps={{ 'aria-label': 'search' }}
               value={searchTerm}
               onChange={handleSearchChange}
+              onKeyDown={handleKeyDown}
+              style={{
+                display: 'flex',
+                zIndex: '1'
+              }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
