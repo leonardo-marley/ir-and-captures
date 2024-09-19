@@ -31,6 +31,14 @@ export default function Home() {
 
   }, [isClient, router]);
 
+  useEffect(() => {
+    const pesquisa = searchParams.get('pesquisa');
+    
+    if (pesquisa && isClient) {
+      router.push(`${pathname}?cMenu=2&pesquisa=${pesquisa}`, { scroll: false });
+    }
+  }, [searchParams, router, pathname, isClient]);
+
   if (!isClient) {
     return null;
   }
@@ -85,12 +93,9 @@ export default function Home() {
   return (
     <main className={styles.main} >
       <Menu />
-      { (cMenu && !pesquisa && !cArquivo) ?
+      { (cMenu && !cArquivo) ?
           <PageInner cMenuUrl={parseInt(cMenu)} />
         :
-          pesquisa ? 
-            <PageInner cMenuUrl={2} />
-          :
           cMenu && <CardDownloadAberto />
       }
       <Rodape />
