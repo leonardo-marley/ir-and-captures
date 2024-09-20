@@ -11,6 +11,8 @@ import ComunidadeInner from "./components/ComunidadeInner";
 import SobreInner from "./components/SobreInner";
 import ContatoInner from "./components/ContatoInner";
 import CardDownloadAberto from "./components/CardDownloadAberto";
+import Perfil from "./components/Perfil";
+import Loading from "./components/Loading";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -25,19 +27,19 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (searchParams.size === 0) {
-      router.push(`${pathname}?cMenu=1`, { scroll: false })
-    }
-
-  }, [isClient, router]);
-
-  useEffect(() => {
     const pesquisa = searchParams.get('pesquisa');
     
     if (pesquisa && isClient) {
       router.push(`${pathname}?cMenu=2&pesquisa=${pesquisa}`, { scroll: false });
     }
   }, [searchParams, router, pathname, isClient]);
+
+  useEffect(() => {
+    if (searchParams.size === 0) {
+      router.push(`${pathname}?cMenu=1`, { scroll: false })
+    }
+
+  }, [isClient, router]);
 
   if (!isClient) {
     return null;
@@ -46,6 +48,7 @@ export default function Home() {
   const cMenu = searchParams.get('cMenu');
   const cArquivo = searchParams.get('cArquivo');
   const pesquisa = searchParams.get('pesquisa');
+  const perfil = searchParams.get('perfil');
 
   interface PageInnerProps {
     cMenuUrl: number;
@@ -93,10 +96,29 @@ export default function Home() {
   return (
     <main className={styles.main} >
       <Menu />
-      { (cMenu && !cArquivo) ?
+      { (cMenu && !cArquivo && !perfil) ?
           <PageInner cMenuUrl={parseInt(cMenu)} />
         :
-          cMenu && <CardDownloadAberto />
+          (cMenu && cArquivo) ?
+            <CardDownloadAberto />
+          : 
+            (cMenu && perfil) ? 
+              <Perfil />
+            :
+              <div 
+                style={{
+                  display: 'flex',
+                  width: '100vw',
+                  height: '60vh',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <Loading
+                  width={100}
+                  height={100}
+                />
+              </div>
       }
       <Rodape />
     </main>
