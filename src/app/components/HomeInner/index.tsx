@@ -145,8 +145,16 @@ export default function HomeInner() {
   const pathname = usePathname();
   const [arquivosRecentes, setArquivosRecentes] = useState<any[]>(cardArquivos);
 
+  const voltarAoTopo = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' 
+    });
+  };
+
   const handleClickVerMais = (codigo: number) => {
-    router.push(`${pathname}?cMenu=${codigo}`, { scroll: false })
+    router.push(`${pathname}?cMenu=${codigo}`, { scroll: false });
+    voltarAoTopo();
   };
 
   const CssTextField = styled(TextField)({
@@ -201,7 +209,7 @@ export default function HomeInner() {
               padding: '.5rem 2rem'
               }}
           >
-            <a href="#Menu">Ver Mais</a>
+            Ver Mais
           </Fab>
         </div>
 

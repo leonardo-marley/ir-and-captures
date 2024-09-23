@@ -14,8 +14,16 @@ export default function Rodape() {
   const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
 
+  const voltarAoTopo = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' 
+    });
+  };
+
   const handleClickMenu = (codigo: number) => {
-    router.push(`${pathname}?cMenu=${codigo}`, { scroll: false })
+    router.push(`${pathname}?cMenu=${codigo}`, { scroll: false });
+    voltarAoTopo();
   };
 
   useEffect(() => {
@@ -28,10 +36,10 @@ export default function Rodape() {
         <footer className={styles.rodape}>
           <div className={styles.container}>
             <div className={styles.colunaContato}>
-                <nav className={styles.contato} onClick={() => handleClickMenu(1)} ><a href="#Menu">Home</a> </nav>
-                <nav className={styles.contato} onClick={() => handleClickMenu(2)}><a href="#Menu">Downloads</a> </nav>
-                <nav className={styles.contato} onClick={() => handleClickMenu(4)}><a href="#Menu">Sobre</a> </nav>
-                <nav className={styles.contato} onClick={() => handleClickMenu(5)}><a href="#Menu">Contato</a> </nav>
+                <nav className={styles.contato} onClick={() => handleClickMenu(1)} >Home </nav>
+                <nav className={styles.contato} onClick={() => handleClickMenu(2)}>Downloads </nav>
+                <nav className={styles.contato} onClick={() => handleClickMenu(4)}>Sobre </nav>
+                <nav className={styles.contato} onClick={() => handleClickMenu(5)}>Contato </nav>
               </div>
             <div className={styles.coluna}>
               {/* <h2>Redes Sociais</h2> */}
