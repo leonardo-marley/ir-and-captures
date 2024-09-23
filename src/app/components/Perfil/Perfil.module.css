@@ -13,9 +13,7 @@
     height: 100%;
     padding: 1rem 1rem 2rem 1rem;
     gap: 1rem;
-    -webkit-box-shadow: 0px 2px 12px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 2px 12px 1px rgba(0,0,0,0.75);
-    box-shadow: 0px 2px 12px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
     border-radius: 4px;
 }
 
@@ -28,7 +26,7 @@
     padding: 1rem 0;
 }
 
-.headerInfo{
+.headerInfo {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -56,4 +54,30 @@
     height: fit-content;
     gap: .5rem;
     padding: 0 2rem;
+}
+
+.containerCardsDownload::-webkit-scrollbar {
+    width: 10px;
+    height: 12px;
+}
+
+.containerCardsDownload::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    padding: 12px;
+}
+
+.containerCardsDownload::-webkit-scrollbar-thumb {
+    height: 5px;
+    width: 5px;
+    padding: 0 3px;
+    background: #888;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.containerCardsDownload::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    padding: 0 3px;
+    background-clip: padding-box;
 }

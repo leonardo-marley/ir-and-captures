@@ -43,7 +43,7 @@ export default function CardDownloadAberto() {
     qtdArquivos: 12,
     cCategoria: 2,
     dataCriacao: '12/09/2024',
-    nomeCriador: 'start894',
+    nomeCriador: 'start789',
     imgPerfilCriador: './Banner1.jpg',
     descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.',
     plataforma: 'NAM', 

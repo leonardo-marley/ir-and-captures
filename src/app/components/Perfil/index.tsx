@@ -11,21 +11,23 @@ import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import GradientIcon from '@mui/icons-material/Gradient';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import CardPerfil from "../CardPerfil";
-import CardTags from "../CardTags";
+import CardDownloadHorizontal from "../CardDownloadHorizontal";
 import { NotificationContainer , NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 interface CardDownloadAbertoProps {
   codigo: number,
-  isLiked: boolean,
+  isSeguindo: boolean,
   nome: string,
   urlDownload: string,
   qtdArquivos: number,
   cCategoria: number,
   dataCriacao: string,
   nomeCriador: string,
-  imgPerfilCriador?: string,
+  imgPerfil?: string,
   descricao?: string,
   plataforma?: string, 
   genero?: string, 
@@ -35,70 +37,296 @@ interface CardDownloadAbertoProps {
 export default function Perfil() {
   const dadoMockado = {
     codigo: 1,
-    isLiked: true,
-    nome: 'start894',
+    isSeguindo: false,
+    nome: 'start789',
     urlDownload: 'string',
     qtdArquivos: 12,
     cCategoria: 2,
     dataCriacao: '12/09/2024',
     nomeCriador: 'start894',
-    imgPerfilCriador: './Banner1.jpg',
+    imgPerfil: './Banner1.jpg',
     descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.',
     plataforma: 'NAM', 
     genero: 'Rock', 
     textura: 'Dry'
   }
+
+  const cardArquivos: any = [
+    {
+      codigo: 1,
+      dataUpload: '08/09/2024',
+      loginCriador: 'start789',
+      nome: 'Vintage Monster Tube Overdrive VT999',
+      cCategoria: 2,
+      categoriaNome: 'Pedal',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 12,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 2,
+      dataUpload: '18/07/2024',
+      loginCriador: 'cleitinho',
+      nome: 'Vintage Monster Tube Overdrive VT999',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: '',
+      cPlataforma: -1,
+      genero: 2,
+      textura: 3,
+      qtdArquivos: 15,
+      likes: 22,
+      qtdDownloads: 17,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 3,
+      dataUpload: '23/07/2024',
+      loginCriador: 'scoob',
+      nome: 'Crate GX-65 (Palmer Macht402 Power Amp)',
+      cCategoria: 4,
+      categoriaNome: 'Amps',
+      nomePlataforma: 'PROTEUS',
+      cPlataforma: 3,
+      genero: 3,
+      textura: 4,
+      qtdArquivos: 16,
+      likes: 15,
+      qtdDownloads: 11,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 4,
+      dataUpload: '11/09/2024',
+      loginCriador: 'start789',
+      nome: 'Browne Dual Protein Overdrive',
+      cCategoria: 2,
+      categoriaNome: 'Pedal',
+      nomePlataforma: 'AIDA-X',
+      cPlataforma: 1,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 9,
+      likes: 17,
+      qtdDownloads: 12,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 5,
+      dataUpload: '08/09/2024',
+      loginCriador: 'start789',
+      nome: 'Vintage Monster Tube Overdrive VT999',
+      cCategoria: 2,
+      categoriaNome: 'Pedal',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    {
+      codigo: 6,
+      dataUpload: '10/09/2024',
+      loginCriador: 'yure',
+      nome: 'youtube Overdrive VT99900000',
+      cCategoria: 3,
+      categoriaNome: 'IRs',
+      nomePlataforma: 'NAM',
+      cPlataforma: 2,
+      genero: 1,
+      textura: 2,
+      qtdArquivos: 5,
+      likes: 2,
+      qtdDownloads: 7,
+      downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    },
+    // {
+    //   codigo: 7,
+    //   dataUpload: '10/09/2024',
+    //   loginCriador: 'yure',
+    //   nome: 'youtube Overdrive VT99900000',
+    //   cCategoria: 3,
+    //   categoriaNome: 'IRs',
+    //   nomePlataforma: 'NAM',
+    //   cPlataforma: 2,
+    //   genero: 1,
+    //   textura: 2,
+    //   qtdArquivos: 5,
+    //   likes: 2,
+    //   qtdDownloads: 7,
+    //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    // },
+    // {
+    //   codigo: 8,
+    //   dataUpload: '10/09/2024',
+    //   loginCriador: 'yure',
+    //   nome: 'youtube Overdrive VT99900000',
+    //   cCategoria: 3,
+    //   categoriaNome: 'IRs',
+    //   nomePlataforma: 'NAM',
+    //   cPlataforma: 2,
+    //   genero: 1,
+    //   textura: 2,
+    //   qtdArquivos: 5,
+    //   likes: 2,
+    //   qtdDownloads: 7,
+    //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    // },
+    // {
+    //   codigo: 9,
+    //   dataUpload: '10/09/2024',
+    //   loginCriador: 'yure',
+    //   nome: 'youtube Overdrive VT99900000',
+    //   cCategoria: 3,
+    //   categoriaNome: 'IRs',
+    //   nomePlataforma: 'NAM',
+    //   cPlataforma: 2,
+    //   genero: 1,
+    //   textura: 2,
+    //   qtdArquivos: 5,
+    //   likes: 2,
+    //   qtdDownloads: 7,
+    //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    // },
+    // {
+    //   codigo: 10,
+    //   dataUpload: '10/09/2024',
+    //   loginCriador: 'yure',
+    //   nome: 'youtube Overdrive VT99900000',
+    //   cCategoria: 3,
+    //   categoriaNome: 'IRs',
+    //   nomePlataforma: 'NAM',
+    //   cPlataforma: 2,
+    //   genero: 1,
+    //   textura: 2,
+    //   qtdArquivos: 5,
+    //   likes: 2,
+    //   qtdDownloads: 7,
+    //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    // },
+    // {
+    //   codigo: 11,
+    //   dataUpload: '10/09/2024',
+    //   loginCriador: 'yure',
+    //   nome: 'youtube Overdrive VT99900000',
+    //   cCategoria: 3,
+    //   categoriaNome: 'IRs',
+    //   nomePlataforma: 'NAM',
+    //   cPlataforma: 2,
+    //   genero: 1,
+    //   textura: 2,
+    //   qtdArquivos: 5,
+    //   likes: 2,
+    //   qtdDownloads: 7,
+    //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    // },
+    // {
+    //   codigo: 12,
+    //   dataUpload: '10/09/2024',
+    //   loginCriador: 'yure',
+    //   nome: 'youtube Overdrive VT99900000',
+    //   cCategoria: 3,
+    //   categoriaNome: 'IRs',
+    //   nomePlataforma: 'NAM',
+    //   cPlataforma: 2,
+    //   genero: 1,
+    //   textura: 2,
+    //   qtdArquivos: 5,
+    //   likes: 2,
+    //   qtdDownloads: 7,
+    //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    // },
+    // {
+    //   codigo: 13,
+    //   dataUpload: '10/09/2024',
+    //   loginCriador: 'yure',
+    //   nome: 'youtube Overdrive VT99900000',
+    //   cCategoria: 3,
+    //   categoriaNome: 'IRs',
+    //   nomePlataforma: 'NAM',
+    //   cPlataforma: 2,
+    //   genero: 1,
+    //   textura: 2,
+    //   qtdArquivos: 5,
+    //   likes: 2,
+    //   qtdDownloads: 7,
+    //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    // },
+    // {
+    //   codigo: 14,
+    //   dataUpload: '10/09/2024',
+    //   loginCriador: 'yure',
+    //   nome: 'youtube Overdrive VT99900000',
+    //   cCategoria: 3,
+    //   categoriaNome: 'IRs',
+    //   nomePlataforma: 'NAM',
+    //   cPlataforma: 2,
+    //   genero: 1,
+    //   textura: 2,
+    //   qtdArquivos: 5,
+    //   likes: 2,
+    //   qtdDownloads: 7,
+    //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    // },
+    // {
+    //   codigo: 15,
+    //   dataUpload: '10/09/2024',
+    //   loginCriador: 'yure',
+    //   nome: 'youtube Overdrive VT99900000',
+    //   cCategoria: 3,
+    //   categoriaNome: 'IRs',
+    //   nomePlataforma: 'NAM',
+    //   cPlataforma: 2,
+    //   genero: 1,
+    //   textura: 2,
+    //   qtdArquivos: 5,
+    //   likes: 2,
+    //   qtdDownloads: 7,
+    //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
+    // },
+  ]
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentUrl = typeof window !== 'undefined' ? window.location.host : '';
-  const [dadosArquivo,setDadosArquivo] = useState<CardDownloadAbertoProps>(dadoMockado);
+  const [dadosPerfil,setDadosPerfil] = useState<CardDownloadAbertoProps>(dadoMockado);
+  const [statusConexao,setStatusConexao] = useState<boolean>(dadoMockado?.isSeguindo);
+  const [arquivosUser, setArquivosUser] = useState(cardArquivos);
 
   const cMenu = searchParams.get('cMenu');
+  const perfil = searchParams.get('perfil');
 
-  const handleMenuClick = (codigo: string | null) => {
-    router.push(`${pathname}?cMenu=${codigo}`, { scroll: false })
+  const voltarAoTopo = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Opcional: para um scroll suave
+    });
   };
 
-  function Icone({ cCategoria }: any) {
-    switch (cCategoria) {
-      case 1:
-        return (
-          <GraphicEqIcon sx={{ fontSize: '13vw', maxWidth: '160px' }} />
-        );
-      case 2:
-        return (
-          <GradientIcon sx={{ fontSize: '13vw', maxWidth: '160px' }} />
-        );
-      case 3:
-        return (
-          <ShowChartIcon sx={{ fontSize: '13vw', maxWidth: '160px' }} />
-        );
-      case 4:
-        return (
-          <CreditCardIcon sx={{ transform: 'rotate(180deg)', fontSize: '13vw', maxWidth: '160px' }} />
-        );
-      case 5:
-        return (
-          <TollIcon sx={{ fontSize: '13vw', maxWidth: '160px' }} />
-        );
-      default:
-        return (
-          <TollIcon sx={{ fontSize: '13vw', maxWidth: '160px' }} />
-        );
-    }
-  }
+  const handleMenuClick = () => {
+    router.back();
+  };
 
-  const copyUrlToClipboard = () => {
-    const params = new URLSearchParams(searchParams);
+  const handleVerTodosArtigos = () => {
+    router.push(`${pathname}?cMenu=${cMenu}&pesquisa=${perfil}`, { scroll: false });
+    voltarAoTopo();
+  };
 
-    if (navigator.clipboard && currentUrl) {
-      navigator.clipboard.writeText(`${currentUrl}`+`${pathname}?${params.toString()}`).then(() => {
-        NotificationManager.success('Link Copiado!', 'Arquivo');
-      }, (err) => {
-        console.error('Falha ao copiar a URL: ', err);
-      });
+  const handleSeguir = () => {
+    if (statusConexao){
+      NotificationManager.success('Deixou de Seguir!', 'Perfil');
+    } else {
+      NotificationManager.success('Seguindo!', 'Perfil');
     }
+    setStatusConexao(!statusConexao);
   };
 
   return (
@@ -109,7 +337,7 @@ export default function Perfil() {
             <IconButton
               size="large"
               color="inherit"
-              onClick={() => handleMenuClick(cMenu)}
+              onClick={() => handleMenuClick()}
             >
               <ArrowBackIcon fontSize="large" />
             </IconButton>
@@ -117,9 +345,9 @@ export default function Perfil() {
 
           <div className={styles.buttonsInfo}>
             <Fab
-              //onClick={() => handleClickVerMais(2)}
+              onClick={handleSeguir}
               color="inherit"
-              sx={!dadosArquivo?.isLiked ? {
+              sx={!statusConexao ? {
                 '&:hover': {
                   backgroundColor: '#9d2053',
                   color: '#fff',
@@ -162,64 +390,103 @@ export default function Perfil() {
                 padding: '.5rem 1rem'
               }}
             >
-              Seguir<AddIcon />
+              {!statusConexao ? 'Seguir' : 'Seguindo'}{!statusConexao && <AddIcon />}
             </Fab>
           </div>
         </div>
 
         <div className={styles.nomeInfo}>
-          <Icone cCategoria={dadosArquivo?.cCategoria} />
-          <h1>{dadosArquivo?.nome}</h1>
+          <div style={{padding: '1rem'}}>
+            <CardPerfil 
+              nome={dadosPerfil?.nome} 
+              urlImagem={dadosPerfil?.imgPerfil}
+              isPerfil
+            />
+          </div>
         </div>
 
         <div className={styles.categoriaInfo}>
-          {<div
-            style={{
-              display: 'flex',
-              borderRadius: 50,
-              backgroundColor: '#9d2053',
-              color: '#fff',
-              padding: '.4rem .5rem .3rem .5rem',
-              width: 'fit-content',
-              fontSize: 'small',
-              fontWeight: 500,
-              marginTop: '.5rem'
-            }}
-          >{dadosArquivo?.qtdArquivos}&nbsp; Arquivos</div>}
+          {
+            <IconButton
+              size="large"
+              color="inherit"
+            >
+              <InstagramIcon fontSize="large"/>
+            </IconButton>
+          }
 
-          {<div
-            style={{
-              display: 'flex',
-              borderRadius: 50,
-              backgroundColor: '#9d2053',
-              color: '#fff',
-              padding: '.4rem .5rem .3rem .5rem',
-              width: 'fit-content',
-              fontSize: 'small',
-              fontWeight: 500,
-              marginTop: '.5rem',
-              alignItems: 'center'
-            }}
-          >{dadosArquivo?.plataforma}</div>}
+          {<IconButton
+              size="large"
+              color="inherit"
+            >
+              <YouTubeIcon fontSize="large"/>
+            </IconButton>}
         </div>
 
-        <p style={{padding: '1rem 2rem'}}>{dadosArquivo?.dataCriacao}</p>
-
-        <div style={{padding: '0 2rem'}}>
-          <CardPerfil nome={dadosArquivo?.nomeCriador} urlImagem={dadosArquivo?.imgPerfilCriador}/>
-        </div>
+        <p style={{ fontSize: 'large', padding: '0 2rem' }}><b>Sobre</b></p>
+        <p style={{ fontSize: 'large', padding: '0 2rem' }}>{dadosPerfil?.descricao}</p>
       </div>
 
       <div className={styles.containerDescricao}>
-        <p style={{ fontSize: 'large' }}><b>Descrição</b></p>
-        <p>{dadosArquivo?.descricao}</p>
-        <p style={{ fontSize: 'large' }}><b>Tags</b></p>
-        <div style={{display: 'flex', gap: '.5rem'}}>
-          <CardTags nome={dadosArquivo?.textura}/>
-          <CardTags nome={dadosArquivo?.genero}/>
+        <p style={{ fontSize: 'large' }}><b>Arquivos({arquivosUser?.length > 0 && arquivosUser?.length})</b></p>
+        <div className={styles.containerCardsDownload} style={ arquivosUser?.length === 0 ? 
+            {display: 'grid', gap: '.5rem', width: '100%', justifyContent: 'center'}
+          :
+            {display: 'grid', gap: '.5rem', gridTemplateRows: '1fr 1fr 1fr 1fr', overflowY: 'hidden'}}>
+          {arquivosUser?.length > 0 ?
+            arquivosUser?.slice(0, 4).map((item:any) => (
+              <div onClick={() => {console.log('Click')}}>
+                <CardDownloadHorizontal
+                  dados={item}
+                  key={item.codigo}
+                />
+              </div>
+            ))
+            :
+            <p style={{display: 'flex',width: '100%', textAlign: 'center'}}><b>Nenhum arquivo enviado.</b></p>
+          }
         </div>
-        <p style={{ fontSize: 'large' }}><b>Lincença</b></p>
-        <p ><b>IR and Captures:</b>&nbsp;&nbsp;Você pode baixar e carregar o arquivo de dados no software, além de usar ou publicar os resultados gerados por ele, sem precisar pagar nada. No entanto, não é permitido enviar, republicar ou distribuir o arquivo de dados sem a permissão expressa do autor.</p>
+
+        <div style={{display: 'flex', width: '100%', justifyContent: 'flex-end'}}>
+          <Fab
+            onClick={() => handleVerTodosArtigos()}
+            color="inherit"
+            sx={{'&:hover': {
+              backgroundColor: '#9d2053',
+              color: '#fff',
+              fontWeight: 600,
+              width: 'fit-content',
+              padding: '.5rem 2rem'
+            }, 
+              fontSize: '14px', 
+              fontWeight: 600, 
+              gap: '1rem', 
+              backgroundColor: '#fff',
+              border: '1px solid #9d2053',
+              color: '#9d2053',
+              justifyContent: 'center',
+              //border: '1px solid #9d2053',
+              borderRadius: '4px',
+              height: '42px',
+              zIndex: 'auto',
+              width: 'fit-content',
+              padding: '.5rem 2rem'
+              }}
+          >
+            Ver Todos
+          </Fab>
+        </div>
+
+        <p style={{ fontSize: 'large' }}><b>Seguidores</b></p>
+        <div style={{display: 'flex', gap: '.5rem'}}>
+          <CardPerfil nome={'Yauro'} urlImagem={'dadosArquivo?.imgPerfilCriador'}/>
+          <CardPerfil nome={'Romanel'} urlImagem={'dadosArquivo?.imgPerfilCriador'}/>
+        </div>
+        <p style={{ fontSize: 'large' }}><b>Seguindo</b></p>
+        <div style={{display: 'flex', gap: '.5rem'}}>
+          <CardPerfil nome={'Yauro'} urlImagem={'dadosArquivo?.imgPerfilCriador'}/>
+          <CardPerfil nome={'Romanel'} urlImagem={'dadosArquivo?.imgPerfilCriador'}/>
+        </div>
       </div>
 
       <NotificationContainer /> 

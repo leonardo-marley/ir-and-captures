@@ -39,8 +39,16 @@ export default function CardsDownload(props: CardsProps) {
     setIsClient(true);
   }, [])
 
+  const voltarAoTopo = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Opcional: para um scroll suave
+    });
+  };
+
   const handleMenuClick = (codigo: number) => {
-    router.push(`${pathname}/?cMenu=${searchParams.get('cMenu')}&cArquivo=${codigo}`, { scroll: false })
+    router.push(`${pathname}/?cMenu=${searchParams.get('cMenu')}&cArquivo=${codigo}`, { scroll: false });
+    voltarAoTopo();
   };
 
   function Icon({ codigo }: any) {
@@ -83,7 +91,6 @@ export default function CardsDownload(props: CardsProps) {
                 <p>{props.qtdArquivos} Arquivos</p>
             </div>
 
-            <a href="#Menu">
               <div className={styles.cardContent}
                 onClick={() => handleMenuClick(props?.codigo)}
               >
@@ -101,7 +108,6 @@ export default function CardsDownload(props: CardsProps) {
                       }}
                   >{props.nomePlataforma}</div>}
               </div>
-            </a>
 
             <div className={styles.cardButtons}>
                 <button><ThumbUpAltIcon className={styles.icon}/><p>{props.likes}</p></button>
