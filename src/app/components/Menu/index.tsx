@@ -142,6 +142,15 @@ export default function Menu() {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
+
+  useEffect(() => {
+    const pesquisa = searchParams.get('pesquisa');
+    if (pesquisa){
+      setSearchTerm(pesquisa);
+    } else {
+      setSearchTerm('');
+    }
+  }, [searchParams, router]);
   
   const handleSearchSubmit = () => {
     const params = new URLSearchParams(searchParams);
