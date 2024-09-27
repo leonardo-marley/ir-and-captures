@@ -13,6 +13,7 @@ import ContatoInner from "./components/ContatoInner";
 import CardDownloadAberto from "./components/CardDownloadAberto";
 import Perfil from "./components/Perfil";
 import Loading from "./components/Loading";
+import { NotificationContainer , NotificationManager} from 'react-notifications';
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -122,6 +123,7 @@ export default function Home() {
               </div>
       }
       <Rodape />
+      <NotificationContainer /> 
     </main>
   );
 }

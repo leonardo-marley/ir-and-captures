@@ -15,7 +15,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import CardPerfil from "../CardPerfil";
 import CardDownloadHorizontal from "../CardDownloadHorizontal";
-import { NotificationContainer , NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 interface CardDownloadAbertoProps {
@@ -29,8 +29,8 @@ interface CardDownloadAbertoProps {
   nomeCriador: string,
   imgPerfil?: string,
   descricao?: string,
-  plataforma?: string, 
-  genero?: string, 
+  plataforma?: string,
+  genero?: string,
   textura?: string
 }
 
@@ -46,8 +46,8 @@ export default function Perfil() {
     nomeCriador: 'start894',
     imgPerfil: './Banner1.jpg',
     descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.',
-    plataforma: 'NAM', 
-    genero: 'Rock', 
+    plataforma: 'NAM',
+    genero: 'Rock',
     textura: 'Dry'
   }
 
@@ -293,13 +293,64 @@ export default function Perfil() {
     //   downloadURL: "https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq"
     // },
   ]
+
+  const seguidores = [
+    { nome: 'bloob2', urlImagem: 'bloob2' },
+    { nome: 'truck3', urlImagem: './sugestao.png' },
+    { nome: 'aloha3', urlImagem: 'teste' },
+    { nome: 'starWars', urlImagem: 'teste' },
+    { nome: 'testando', urlImagem: 'teste' },
+    { nome: 'trator', urlImagem: 'teste' },
+    { nome: 'silverBlade', urlImagem: 'teste' },
+    { nome: 'carros', urlImagem: 'teste' },
+  ]
+
+  const seguindo = [
+    { nome: 'Yauro', urlImagem: 'bloob2' },
+    { nome: 'Marley', urlImagem: './sugestao.png' },
+    { nome: 'aloha3', urlImagem: 'teste' },
+    { nome: 'starWars', urlImagem: 'teste' },
+    { nome: 'testando', urlImagem: 'teste' },
+    { nome: 'trator', urlImagem: 'teste' },
+    { nome: 'silverBlade', urlImagem: 'teste' },
+    { nome: 'carros', urlImagem: 'teste' },
+    { nome: 'bloob2', urlImagem: 'bloob2' },
+    { nome: 'truck3', urlImagem: './sugestao.png' },
+    { nome: 'Yauro', urlImagem: 'bloob2' },
+    { nome: 'Marley', urlImagem: './sugestao.png' },
+    { nome: 'aloha3', urlImagem: 'teste' },
+    { nome: 'starWars', urlImagem: 'teste' },
+    { nome: 'testando', urlImagem: 'teste' },
+    { nome: 'trator', urlImagem: 'teste' },
+    { nome: 'silverBlade', urlImagem: 'teste' },
+    { nome: 'carros', urlImagem: 'teste' },
+    { nome: 'bloob2', urlImagem: 'bloob2' },
+    { nome: 'truck3', urlImagem: './sugestao.png' },
+    { nome: 'Yauro', urlImagem: 'bloob2' },
+    { nome: 'Marley', urlImagem: './sugestao.png' },
+    { nome: 'aloha3', urlImagem: 'teste' },
+    { nome: 'starWars', urlImagem: 'teste' },
+    { nome: 'testando', urlImagem: 'teste' },
+    { nome: 'trator', urlImagem: 'teste' },
+    { nome: 'silverBlade', urlImagem: 'teste' },
+    { nome: 'carros', urlImagem: 'teste' },
+    { nome: 'bloob2', urlImagem: 'bloob2' },
+    { nome: 'truck3', urlImagem: './sugestao.png' },
+  ]
+
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentUrl = typeof window !== 'undefined' ? window.location.host : '';
-  const [dadosPerfil,setDadosPerfil] = useState<CardDownloadAbertoProps>(dadoMockado);
-  const [statusConexao,setStatusConexao] = useState<boolean>(dadoMockado?.isSeguindo);
+  const [dadosPerfil, setDadosPerfil] = useState<CardDownloadAbertoProps>(dadoMockado);
+  const [statusConexao, setStatusConexao] = useState<boolean>(dadoMockado?.isSeguindo);
   const [arquivosUser, setArquivosUser] = useState(cardArquivos);
+  const [userSeguidores, setUserSeguidores] = useState(seguidores);
+  const [userSeguindo, setUserSeguindo] = useState(seguindo);
+  const [verMaisSeguidores, setVerMaisSeguidores] = useState<boolean>(false);
+  const [verMaisSeguindo, setVerMaisSeguindo] = useState<boolean>(false);
+
 
   const cMenu = searchParams.get('cMenu');
   const perfil = searchParams.get('perfil');
@@ -321,7 +372,7 @@ export default function Perfil() {
   };
 
   const handleSeguir = () => {
-    if (statusConexao){
+    if (statusConexao) {
       NotificationManager.success('Deixou de Seguir!', 'Perfil');
     } else {
       NotificationManager.success('Seguindo!', 'Perfil');
@@ -396,9 +447,9 @@ export default function Perfil() {
         </div>
 
         <div className={styles.nomeInfo}>
-          <div style={{padding: '1rem'}}>
-            <CardPerfil 
-              nome={dadosPerfil?.nome} 
+          <div style={{ padding: '1rem' }}>
+            <CardPerfil
+              nome={dadosPerfil?.nome}
               urlImagem={dadosPerfil?.imgPerfil}
               isPerfil
             />
@@ -411,16 +462,16 @@ export default function Perfil() {
               size="large"
               color="inherit"
             >
-              <InstagramIcon fontSize="large"/>
+              <InstagramIcon fontSize="large" />
             </IconButton>
           }
 
           {<IconButton
-              size="large"
-              color="inherit"
-            >
-              <YouTubeIcon fontSize="large"/>
-            </IconButton>}
+            size="large"
+            color="inherit"
+          >
+            <YouTubeIcon fontSize="large" />
+          </IconButton>}
         </div>
 
         <p style={{ fontSize: 'large', padding: '0 2rem' }}><b>Sobre</b></p>
@@ -428,14 +479,14 @@ export default function Perfil() {
       </div>
 
       <div className={styles.containerDescricao}>
-        <p style={{ fontSize: 'large' }}><b>Arquivos({arquivosUser?.length > 0 && arquivosUser?.length})</b></p>
-        <div className={styles.containerCardsDownload} style={ arquivosUser?.length === 0 ? 
-            {display: 'grid', gap: '.5rem', width: '100%', justifyContent: 'center'}
+        <p style={{ fontSize: 'large' }}><b>Arquivos({arquivosUser?.length > 0 ? arquivosUser?.length : 0})</b></p>
+        <div className={styles.containerCardsDownload} style={arquivosUser?.length === 0 ?
+          { display: 'grid', gap: '.5rem', width: '100%', justifyContent: 'center' }
           :
-            {display: 'grid', gap: '.5rem', gridTemplateRows: '1fr 1fr 1fr 1fr', overflowY: 'hidden'}}>
+          { display: 'grid', gap: '.5rem', gridTemplateRows: '1fr 1fr 1fr 1fr', overflowY: 'hidden' }}>
           {arquivosUser?.length > 0 ?
-            arquivosUser?.slice(0, 4).map((item:any) => (
-              <div onClick={() => {console.log('Click')}}>
+            arquivosUser?.slice(0, 4).map((item: any) => (
+              <div onClick={() => { console.log('Click') }}>
                 <CardDownloadHorizontal
                   dados={item}
                   key={item.codigo}
@@ -443,24 +494,25 @@ export default function Perfil() {
               </div>
             ))
             :
-            <p style={{display: 'flex',width: '100%', textAlign: 'center'}}><b>Nenhum arquivo enviado.</b></p>
+            <p style={{ display: 'flex', width: '100%', textAlign: 'center',justifyContent: 'center' }}><b>Nenhum arquivo enviado.</b></p>
           }
         </div>
 
-        <div style={{display: 'flex', width: '100%', justifyContent: 'flex-end'}}>
+        {arquivosUser?.length > 0 && <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
           <Fab
             onClick={() => handleVerTodosArtigos()}
             color="inherit"
-            sx={{'&:hover': {
-              backgroundColor: '#9d2053',
-              color: '#fff',
+            sx={{
+              '&:hover': {
+                backgroundColor: '#9d2053',
+                color: '#fff',
+                fontWeight: 600,
+                width: 'fit-content',
+                padding: '.5rem 2rem'
+              },
+              fontSize: '14px',
               fontWeight: 600,
-              width: 'fit-content',
-              padding: '.5rem 2rem'
-            }, 
-              fontSize: '14px', 
-              fontWeight: 600, 
-              gap: '1rem', 
+              gap: '1rem',
               backgroundColor: '#fff',
               border: '1px solid #9d2053',
               color: '#9d2053',
@@ -471,25 +523,126 @@ export default function Perfil() {
               zIndex: 'auto',
               width: 'fit-content',
               padding: '.5rem 2rem'
-              }}
+            }}
           >
             Ver Todos
           </Fab>
-        </div>
+        </div>}
 
         <p style={{ fontSize: 'large' }}><b>Seguidores</b></p>
-        <div style={{display: 'flex', gap: '.5rem'}}>
-          <CardPerfil nome={'Yauro'} urlImagem={'dadosArquivo?.imgPerfilCriador'}/>
-          <CardPerfil nome={'Romanel'} urlImagem={'dadosArquivo?.imgPerfilCriador'}/>
+        <div style={ !verMaisSeguidores ? { 
+          display: 'flex', 
+          flexWrap: 'wrap',
+          gap: '.5rem', 
+          maxHeight: '150px',
+          overflowY: 'hidden' 
+        } : {
+          display: 'flex', 
+          flexWrap: 'wrap',
+          gap: '.5rem', 
+        }}>
+          {userSeguidores?.length > 0 ?
+            userSeguidores?.map((item: any) => (
+              <div onClick={() => { console.log('Click') }}>
+                <CardPerfil
+                  nome={item.nome}
+                  urlImagem={item.urlImagem}
+                />
+              </div>
+            ))
+            :
+            <p style={{ display: 'flex', width: '100%', textAlign: 'center',justifyContent: 'center' }}><b>Nenhum Seguidor.</b></p>
+          }
         </div>
+        {userSeguidores?.length > 0 && <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
+          <Fab
+            onClick={() => setVerMaisSeguidores(!verMaisSeguidores)}
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#9d2053',
+                color: '#fff',
+                fontWeight: 600,
+                width: 'fit-content',
+                padding: '.5rem 2rem'
+              },
+              fontSize: '14px',
+              fontWeight: 600,
+              gap: '1rem',
+              backgroundColor: '#fff',
+              border: '1px solid #9d2053',
+              color: '#9d2053',
+              justifyContent: 'center',
+              //border: '1px solid #9d2053',
+              borderRadius: '4px',
+              height: '42px',
+              zIndex: 'auto',
+              width: 'fit-content',
+              padding: '.5rem 2rem'
+            }}
+          >
+            Ver Todos
+          </Fab>
+        </div>}
         <p style={{ fontSize: 'large' }}><b>Seguindo</b></p>
-        <div style={{display: 'flex', gap: '.5rem'}}>
-          <CardPerfil nome={'Yauro'} urlImagem={'dadosArquivo?.imgPerfilCriador'}/>
-          <CardPerfil nome={'Romanel'} urlImagem={'dadosArquivo?.imgPerfilCriador'}/>
+        <div style={ !verMaisSeguindo ? { 
+          display: 'flex', 
+          flexWrap: 'wrap',
+          gap: '.5rem', 
+          maxHeight: '150px',
+          overflowY: 'hidden' 
+        } : {
+          display: 'flex', 
+          flexWrap: 'wrap',
+          gap: '.5rem', 
+        }}>
+          {userSeguindo?.length > 0 ?
+            userSeguindo?.map((item: any) => (
+              <div onClick={() => { console.log('Click') }}>
+                <CardPerfil
+                  nome={item.nome}
+                  urlImagem={item.urlImagem}
+                />
+              </div>
+            ))
+            :
+            <p style={{ display: 'flex', width: '100%', textAlign: 'center',justifyContent: 'center' }}><b>Não Segue Ninguem.</b></p>
+          }
         </div>
+
+        {userSeguindo?.length > 0 && <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
+          <Fab
+            onClick={() => setVerMaisSeguindo(!verMaisSeguindo)}
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#9d2053',
+                color: '#fff',
+                fontWeight: 600,
+                width: 'fit-content',
+                padding: '.5rem 2rem'
+              },
+              fontSize: '14px',
+              fontWeight: 600,
+              gap: '1rem',
+              backgroundColor: '#fff',
+              border: '1px solid #9d2053',
+              color: '#9d2053',
+              justifyContent: 'center',
+              //border: '1px solid #9d2053',
+              borderRadius: '4px',
+              height: '42px',
+              zIndex: 'auto',
+              width: 'fit-content',
+              padding: '.5rem 2rem'
+            }}
+          >
+            Ver Todos
+          </Fab>
+        </div>}
       </div>
 
-      <NotificationContainer /> 
+      <NotificationContainer />
     </div>
   );
 }

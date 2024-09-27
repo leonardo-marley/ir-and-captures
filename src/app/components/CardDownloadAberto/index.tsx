@@ -279,8 +279,6 @@ export default function CardDownloadAberto() {
         <p style={{ fontSize: 'large' }}><b>Lincença</b></p>
         <p ><b>IR and Captures:</b>&nbsp;&nbsp;Você pode baixar e carregar o arquivo de dados no software, além de usar ou publicar os resultados gerados por ele, sem precisar pagar nada. No entanto, não é permitido enviar, republicar ou distribuir o arquivo de dados sem a permissão expressa do autor.</p>
       </div>
-
-      <NotificationContainer /> 
     </div>
   );
 }
