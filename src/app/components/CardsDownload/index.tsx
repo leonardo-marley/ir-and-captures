@@ -40,6 +40,7 @@ export default function CardsDownload(props: CardsProps) {
   const [isLiked, setIsLiked] = useState<any>(null);
   const [qtdLikes, setQtdLikes] = useState<any>(null);
   const [qtdDownloads, setQtdDownloads] = useState<any>(null);
+  const [isDownloaded, setIsDownloaded] = useState<any>(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -50,6 +51,7 @@ export default function CardsDownload(props: CardsProps) {
       setIsLiked(props?.isLiked);
       setQtdLikes(props?.likes);
       setQtdDownloads(props?.qtdDownloads);
+      setIsDownloaded(props?.isDownloaded);
     }
   }, [props])
 
@@ -98,11 +100,19 @@ export default function CardsDownload(props: CardsProps) {
     if (!isLiked) {
       setIsLiked(true);
       setQtdLikes(qtdLikes+1);
-      NotificationManager.success('Curtiu!', 'Arquivo');
+      NotificationManager.success('Curtiu!','Arquivo');
     } else {
       setIsLiked(false);
       setQtdLikes(qtdLikes-1);
-      NotificationManager.success('Descurtiu!', 'Arquivo');
+      NotificationManager.success('Deixou de Curtir!','Arquivo');
+    }
+  };
+
+  const handleClickDownload = (codigo: number) => {
+    if (!isDownloaded) {
+      setQtdDownloads(qtdDownloads + 1);
+    } else {
+      setQtdDownloads(qtdDownloads - 1);
     }
   };
 
@@ -138,14 +148,14 @@ export default function CardsDownload(props: CardsProps) {
             <div className={styles.cardButtons}>
                 <button onClick={() => handleClickLike(props.codigo)}>
                   <ThumbUpAltIcon className={styles.icon} sx={isLiked ? {color: '#9d2053'} : {}}/>
-                  <p>{qtdLikes}</p>
+                  <p >{qtdLikes}</p>
                 </button>
-                <button >
+                <button onClick={() => handleClickDownload(props.codigo)}>
                   <a href={`https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq`}>
                     <FileDownloadRoundedIcon 
                       className={styles.icon}
                     />
-                      <p>{props.qtdDownloads}</p>
+                      <p>{qtdDownloads}</p>
                   </a>
                 </button>
             </div>

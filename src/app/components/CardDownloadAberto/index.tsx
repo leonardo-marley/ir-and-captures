@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CardDownloadAberto.module.css";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Fab, IconButton } from "@mui/material";
@@ -55,11 +55,28 @@ export default function CardDownloadAberto() {
   const searchParams = useSearchParams();
   const currentUrl = typeof window !== 'undefined' ? window.location.host : '';
   const [dadosArquivo,setDadosArquivo] = useState<CardDownloadAbertoProps>(dadoMockado);
+  const [isLiked, setIsLiked] = useState<any>();
 
   const cMenu = searchParams.get('cMenu');
 
+  useEffect(() => {
+    if (dadosArquivo) {
+      setIsLiked(dadosArquivo?.isLiked);
+    }
+  }, [dadosArquivo])
+
   const handleMenuClick = (codigo: string | null) => {
     router.push(`${pathname}?cMenu=${codigo}`, { scroll: false })
+  };
+
+  const handleClickLike = (codigo: number) => {
+    if (!isLiked) {
+      setIsLiked(true);
+      NotificationManager.success('Curtiu!','Arquivo');
+    } else {
+      setIsLiked(false);
+      NotificationManager.success('Deixou de Curtir!','Arquivo');
+    }
   };
 
   function Icone({ cCategoria }: any) {
@@ -119,9 +136,9 @@ export default function CardDownloadAberto() {
 
           <div className={styles.buttonsInfo}>
             <Fab
-              //onClick={() => handleClickVerMais(2)}
+              onClick={() => handleClickLike(dadosArquivo?.codigo)}
               color="inherit"
-              sx={!dadosArquivo?.isLiked ? {
+              sx={!isLiked ? {
                 '&:hover': {
                   backgroundColor: '#9d2053',
                   color: '#fff',

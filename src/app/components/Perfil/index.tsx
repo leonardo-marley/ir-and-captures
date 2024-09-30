@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Perfil.module.css";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Fab, IconButton } from "@mui/material";
@@ -344,13 +344,18 @@ export default function Perfil() {
   const searchParams = useSearchParams();
   const currentUrl = typeof window !== 'undefined' ? window.location.host : '';
   const [dadosPerfil, setDadosPerfil] = useState<CardDownloadAbertoProps>(dadoMockado);
-  const [statusConexao, setStatusConexao] = useState<boolean>(dadoMockado?.isSeguindo);
+  const [statusConexao, setStatusConexao] = useState<boolean>();
   const [arquivosUser, setArquivosUser] = useState(cardArquivos);
   const [userSeguidores, setUserSeguidores] = useState(seguidores);
   const [userSeguindo, setUserSeguindo] = useState(seguindo);
   const [verMaisSeguidores, setVerMaisSeguidores] = useState<boolean>(false);
   const [verMaisSeguindo, setVerMaisSeguindo] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (dadosPerfil) {
+      setStatusConexao(dadosPerfil?.isSeguindo);
+    }
+  }, [dadosPerfil])
 
   const cMenu = searchParams.get('cMenu');
   const perfil = searchParams.get('perfil');
@@ -378,6 +383,27 @@ export default function Perfil() {
       NotificationManager.success('Seguindo!', 'Perfil');
     }
     setStatusConexao(!statusConexao);
+  };
+
+  const scrollToDivSeguindo = () => {
+    const targetDiv = document.getElementById('seguindo');
+    if (targetDiv) {
+      targetDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToDivSeguidores = () => {
+    const targetDiv = document.getElementById('seguidores');
+    if (targetDiv) {
+      targetDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToDivArquivos = () => {
+    const targetDiv = document.getElementById('arquivos');
+    if (targetDiv) {
+      targetDiv.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -461,16 +487,56 @@ export default function Perfil() {
             <IconButton
               size="large"
               color="inherit"
+              style={{
+                borderRadius: '4px'
+              }}
             >
-              <InstagramIcon fontSize="large" />
+              <a onClick={scrollToDivSeguindo}
+                style={{
+                  display: 'grid',
+                  alignItems: 'center'
+                }}
+              >
+                <p style={{fontSize: 'small', fontWeight: '600'}}>Seguindo</p>
+                <span style={{fontSize: 'small', textShadow: '1px 1px 6px rgba(0, 0, 0, .30196078431372547)'}}>30</span>
+              </a>
             </IconButton>
           }
 
           {<IconButton
             size="large"
             color="inherit"
+            style={{
+              borderRadius: '4px'
+            }}
           >
-            <YouTubeIcon fontSize="large" />
+            <a onClick={scrollToDivSeguidores}
+              style={{
+                display: 'grid',
+                alignItems: 'center'
+              }}
+            >
+              <p style={{fontSize: 'small', fontWeight: '600'}}>Seguidores</p>
+              <span style={{fontSize: 'small', textShadow: '1px 1px 6px rgba(0, 0, 0, .30196078431372547)'}}>8</span>
+            </a>
+          </IconButton>}
+
+          {<IconButton
+            size="large"
+            color="inherit"
+            style={{
+              borderRadius: '4px'
+            }}
+          >
+            <a onClick={scrollToDivArquivos}
+              style={{
+                display: 'grid',
+                alignItems: 'center'
+              }}
+            >
+              <p style={{fontSize: 'small', fontWeight: '600'}}>Uploads</p>
+              <span style={{fontSize: 'small', textShadow: '1px 1px 6px rgba(0, 0, 0, .30196078431372547)'}}>6</span>
+            </a>
           </IconButton>}
         </div>
 
@@ -478,7 +544,7 @@ export default function Perfil() {
         <p style={{ fontSize: 'large', padding: '0 2rem' }}>{dadosPerfil?.descricao}</p>
       </div>
 
-      <div className={styles.containerDescricao}>
+      <div className={styles.containerDescricao} id="arquivos">
         <p style={{ fontSize: 'large' }}><b>Arquivos({arquivosUser?.length > 0 ? arquivosUser?.length : 0})</b></p>
         <div className={styles.containerCardsDownload} style={arquivosUser?.length === 0 ?
           { display: 'grid', gap: '.5rem', width: '100%', justifyContent: 'center' }
@@ -529,7 +595,7 @@ export default function Perfil() {
           </Fab>
         </div>}
 
-        <p style={{ fontSize: 'large' }}><b>Seguidores</b></p>
+        <p style={{ fontSize: 'large' }} id="seguidores"><b>Seguidores</b></p>
         <div style={ !verMaisSeguidores ? { 
           display: 'flex', 
           flexWrap: 'wrap',
@@ -581,10 +647,10 @@ export default function Perfil() {
               padding: '.5rem 2rem'
             }}
           >
-            Ver Todos
+            {!verMaisSeguidores ? 'Ver Todos' : 'Ver menos'}
           </Fab>
         </div>}
-        <p style={{ fontSize: 'large' }}><b>Seguindo</b></p>
+        <p style={{ fontSize: 'large' }} id="seguindo"><b>Seguindo</b></p>
         <div style={ !verMaisSeguindo ? { 
           display: 'flex', 
           flexWrap: 'wrap',
@@ -637,7 +703,7 @@ export default function Perfil() {
               padding: '.5rem 2rem'
             }}
           >
-            Ver Todos
+            {!verMaisSeguindo ? 'Ver Todos' : 'Ver menos'}
           </Fab>
         </div>}
       </div>

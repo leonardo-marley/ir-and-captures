@@ -11,15 +11,18 @@ import TollIcon from '@mui/icons-material/Toll';
 import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { NotificationContainer , NotificationManager} from 'react-notifications';
 
 // Components //
 import styles from './CardDownloadHorizontal.module.css'
+import { useEffect, useState } from 'react';
 
 
 export interface CardDownloadHorizontalProps {
   codigo: number,
   dataUpload?: string,
   nome?: string,
+  isLiked?: boolean,
   cCategoria?: number,
   categoriaNome?: string,
   nomePlataforma?: string,
@@ -43,6 +46,23 @@ export default function CardDownloadHorizontal(props: CardDownloadHorizontalComp
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [isLiked, setIsLiked] = useState<any>();
+
+  useEffect(() => {
+    if (props) {
+      setIsLiked(props.dados?.isLiked);
+    }
+  }, [props])
+
+  const handleClickLike = (codigo: number) => {
+    if (!isLiked) {
+      setIsLiked(true);
+      NotificationManager.success('Curtiu!','Arquivo');
+    } else {
+      setIsLiked(false);
+      NotificationManager.success('Deixou de Curtir!','Arquivo');
+    }
+  };
 
   function Icone({ cCategoria }: any) {
     switch (cCategoria) {
@@ -140,9 +160,9 @@ export default function CardDownloadHorizontal(props: CardDownloadHorizontalComp
       </a>
       <div className={styles.containerButtons}>
         <Fab
-          //onClick={() => handleClickVerMais(2)}
+          onClick={() => handleClickLike(props.dados.codigo)}
           color="inherit"
-          sx={props.dados.codigo !== 123555 ? {
+          sx={!isLiked ? {
             '&:hover': {
               backgroundColor: '#9d2053',
               color: '#fff',
