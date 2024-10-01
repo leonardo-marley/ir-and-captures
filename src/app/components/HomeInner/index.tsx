@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./HomeInner.module.css";
-import Caroussel  from "./../Caroussel/Index";
+import Caroussel from "./../Caroussel/Index";
 import CardsDownload from "../CardsDownload";
 import Loading from "../Loading";
 import { Button, Fab, styled } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 export default function HomeInner() {
   const cardArquivos: any = [
@@ -144,17 +145,34 @@ export default function HomeInner() {
   const router = useRouter();
   const pathname = usePathname();
   const [arquivosRecentes, setArquivosRecentes] = useState<any[]>(cardArquivos);
+  const mensagemRef = useRef<HTMLInputElement>(null);
 
   const voltarAoTopo = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth' 
+      behavior: 'smooth'
     });
   };
 
   const handleClickVerMais = (codigo: number) => {
     router.push(`${pathname}?cMenu=${codigo}`, { scroll: false });
     voltarAoTopo();
+  };
+
+  const handleEnviarSugestao = () => {
+    const mensagem = mensagemRef.current?.value || '';
+
+    if (mensagem.trim() === '') {
+      NotificationManager.error('Escreva uma mensagem!', 'Home');
+      return;
+    }
+
+    console.log('Mensagem enviada:', mensagem);
+
+    if (mensagemRef.current) {
+      mensagemRef.current.value = '';
+    }
+    NotificationManager.success('Sugestão Enviada!', 'Home');
   };
 
   const CssTextField = styled(TextField)({
@@ -175,11 +193,11 @@ export default function HomeInner() {
         borderColor: '#341931',
       },
     },
-    });
-  
+  });
+
   return (
     <div className={styles.containerHome}>
-      <Caroussel/>
+      <Caroussel />
       <div className={styles.containerCards}>
 
         <div className={styles.cardsHeader}>
@@ -187,16 +205,17 @@ export default function HomeInner() {
           <Fab
             onClick={() => handleClickVerMais(2)}
             color="inherit"
-            sx={{'&:hover': {
-              backgroundColor: '#9d2053',
-              color: '#fff',
+            sx={{
+              '&:hover': {
+                backgroundColor: '#9d2053',
+                color: '#fff',
+                fontWeight: 600,
+                width: 'fit-content',
+                padding: '.5rem 2rem'
+              },
+              fontSize: '14px',
               fontWeight: 600,
-              width: 'fit-content',
-              padding: '.5rem 2rem'
-            }, 
-              fontSize: '14px', 
-              fontWeight: 600, 
-              gap: '1rem', 
+              gap: '1rem',
               backgroundColor: '#fff',
               border: '1px solid #9d2053',
               color: '#9d2053',
@@ -207,38 +226,38 @@ export default function HomeInner() {
               zIndex: 'auto',
               width: 'fit-content',
               padding: '.5rem 2rem'
-              }}
+            }}
           >
             Ver Mais
           </Fab>
         </div>
 
         <div className={styles.cardsDownloads}>
-          { arquivosRecentes ?
-              arquivosRecentes.map((item:any) => (
-                <CardsDownload
-                  key={item.codigo}
-                  codigo={item.codigo}
-                  dataUpload={item.dataUpload}
-                  loginCriador={item.loginCriador}
-                  nome={item.nome}
-                  cCategoria={item.cCategoria}
-                  categoriaNome={item.categoriaNome}
-                  nomePlataforma={item.nomePlataforma}
-                  cPlataforma={item.cPlataforma}
-                  genero={item.genero}
-                  textura={item.textura}
-                  qtdArquivos={item.qtdArquivos}
-                  likes={item.likes}
-                  qtdDownloads={item.qtdDownloads}
-                />
-              ))
-              :
-              <Loading
-                width={100}
-                height={100}
+          {arquivosRecentes ?
+            arquivosRecentes.map((item: any) => (
+              <CardsDownload
+                key={item.codigo}
+                codigo={item.codigo}
+                dataUpload={item.dataUpload}
+                loginCriador={item.loginCriador}
+                nome={item.nome}
+                cCategoria={item.cCategoria}
+                categoriaNome={item.categoriaNome}
+                nomePlataforma={item.nomePlataforma}
+                cPlataforma={item.cPlataforma}
+                genero={item.genero}
+                textura={item.textura}
+                qtdArquivos={item.qtdArquivos}
+                likes={item.likes}
+                qtdDownloads={item.qtdDownloads}
               />
-            }
+            ))
+            :
+            <Loading
+              width={100}
+              height={100}
+            />
+          }
         </div>
       </div>
 
@@ -264,23 +283,25 @@ export default function HomeInner() {
             label="Mensagem"
             multiline
             rows={3}
+            inputRef={mensagemRef}
           />
 
           <Button
-            //onClick={handleProfileMenuOpen}
+            onClick={handleEnviarSugestao}
             color="inherit"
-            sx={{'&:hover': {
-              backgroundColor: '#9d2053',
-              border: '1px solid #9d2053',
-              color: '#fff'
-            }, 
-              fontSize: '14px', 
-              fontWeight: 600, 
-              gap: '.5rem', 
+            sx={{
+              '&:hover': {
+                backgroundColor: '#9d2053',
+                border: '1px solid #9d2053',
+                color: '#fff'
+              },
+              fontSize: '14px',
+              fontWeight: 600,
+              gap: '.5rem',
               backgroundColor: '#fff',
               color: '#9d2053',
               border: '1px solid #9d2053'
-              }}
+            }}
           >
             Enviar
           </Button>

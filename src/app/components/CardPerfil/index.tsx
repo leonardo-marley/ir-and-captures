@@ -40,15 +40,19 @@ export default function CardPerfil(props: CardPerfilProps) {
                   height: '50px',
                   fontSize:'28px',
                   backgroundColor: '#341931',
-                  color: '#fff'
+                  color: '#fff',
+                  borderRadius: '4px'
                 }:{
                   width: '13vw',
                   maxWidth: '160px',
+                  minWidth: '160px',
                   height: '13vw',
                   maxHeight: '160px',
+                  minHeight: '160px',
                   fontSize:'28px',
                   backgroundColor: '#341931',
                   color: '#fff',
+                  borderRadius: '4px'
                 }}
               />
             }
@@ -69,6 +73,7 @@ export default function CardPerfil(props: CardPerfilProps) {
                 backgroundColor: '#9d205340'
               }
             }: {
+              display: 'grid',
               minWidth: '140px',
               width: '100%',
               height: '70px',
@@ -76,9 +81,11 @@ export default function CardPerfil(props: CardPerfilProps) {
               fontSize: '2em',
               fontWeight: 'bold', 
               lineHeight: 1.2, 
-              margin: '0.67em 0', 
+              marginTop: '-3rem', 
               border: 'none',
-              justifyContent: 'space-between',
+              alignItems: 'center',
+              justifyItems: 'center',
+              justifyContent: 'center',
               gap: '2rem'
             }}
           />
