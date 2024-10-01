@@ -12,6 +12,7 @@ import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { NotificationContainer , NotificationManager} from 'react-notifications';
+import Tooltip from '@mui/material/Tooltip';
 
 interface CardsProps {
     codigo: number,
@@ -130,7 +131,9 @@ export default function CardsDownload(props: CardsProps) {
               <div className={styles.cardContent}
                 onClick={() => handleMenuClick(props?.codigo)}
               >
-                  <h3>{props.nome}</h3>
+                  <Tooltip title={props.nome}>
+                    <h3 >{props.nome}</h3>
+                  </Tooltip>
                   {props?.nomePlataforma !== '' && <div 
                       style={{
                           display: 'flex', 

@@ -498,7 +498,7 @@ export default function Perfil() {
                 }}
               >
                 <p style={{fontSize: 'small', fontWeight: '600'}}>Seguindo</p>
-                <span style={{fontSize: 'small', textShadow: '1px 1px 6px rgba(0, 0, 0, .30196078431372547)'}}>30</span>
+                <span style={{fontSize: 'small', textShadow: '1px 1px 6px rgba(0, 0, 0, .30196078431372547)'}}>{userSeguindo?.length}</span>
               </a>
             </IconButton>
           }
@@ -517,7 +517,7 @@ export default function Perfil() {
               }}
             >
               <p style={{fontSize: 'small', fontWeight: '600'}}>Seguidores</p>
-              <span style={{fontSize: 'small', textShadow: '1px 1px 6px rgba(0, 0, 0, .30196078431372547)'}}>8</span>
+              <span style={{fontSize: 'small', textShadow: '1px 1px 6px rgba(0, 0, 0, .30196078431372547)'}}>{userSeguidores?.length}</span>
             </a>
           </IconButton>}
 
@@ -535,7 +535,7 @@ export default function Perfil() {
               }}
             >
               <p style={{fontSize: 'small', fontWeight: '600'}}>Uploads</p>
-              <span style={{fontSize: 'small', textShadow: '1px 1px 6px rgba(0, 0, 0, .30196078431372547)'}}>6</span>
+              <span style={{fontSize: 'small', textShadow: '1px 1px 6px rgba(0, 0, 0, .30196078431372547)'}}>{arquivosUser?.length}</span>
             </a>
           </IconButton>}
         </div>

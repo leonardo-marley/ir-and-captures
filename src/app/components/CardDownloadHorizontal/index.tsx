@@ -12,6 +12,7 @@ import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { NotificationContainer , NotificationManager} from 'react-notifications';
+import Tooltip from '@mui/material/Tooltip';
 
 // Components //
 import styles from './CardDownloadHorizontal.module.css'
@@ -113,9 +114,11 @@ export default function CardDownloadHorizontal(props: CardDownloadHorizontalComp
         </div>
 
         <div className={styles.containerCollectionContent} onClick={() => handleMenuClick(props.dados.codigo)}>
-          <h3 title={props.dados.nome}>
-            {props.dados.nome}
-          </h3>
+          <Tooltip title={props.dados.nome}>
+            <h3 title={props.dados.nome} className={styles.titleCard}>
+              {props.dados.nome}
+            </h3>
+          </Tooltip>
           <div className={styles.categoriaInfo}>
             {<div
               style={{
