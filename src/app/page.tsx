@@ -13,6 +13,7 @@ import ContatoInner from "./components/ContatoInner";
 import CardDownloadAberto from "./components/CardDownloadAberto";
 import Perfil from "./components/Perfil";
 import Loading from "./components/Loading";
+import { NotificationContainer , NotificationManager} from 'react-notifications';
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -27,19 +28,20 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (!isClient) return; // Aguarda o componente ser montado
+
     const pesquisa = searchParams.get('pesquisa');
-    
-    if (pesquisa && isClient) {
+    const cMenu = searchParams.get('cMenu');
+    console.log('Parâmetros:',cMenu , pesquisa)
+
+    if (cMenu === null) {
+      // Se cMenu não está presente, redireciona para cMenu=1
+      router.push(`${pathname}?cMenu=1`, { scroll: false });
+    } else if (pesquisa) {
+      // Se pesquisa está presente, redireciona com cMenu=2
       router.push(`${pathname}?cMenu=2&pesquisa=${pesquisa}`, { scroll: false });
     }
   }, [searchParams, router, pathname, isClient]);
-
-  useEffect(() => {
-    if (searchParams.size === 0) {
-      router.push(`${pathname}?cMenu=1`, { scroll: false })
-    }
-
-  }, [isClient, router]);
 
   if (!isClient) {
     return null;
@@ -121,6 +123,7 @@ export default function Home() {
               </div>
       }
       <Rodape />
+      <NotificationContainer /> 
     </main>
   );
 }

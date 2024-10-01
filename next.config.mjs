@@ -1,15 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'www.pmtonline.co.uk',
-          pathname: '/**',
-        },
-      ],
-    },
-  };
-  
-  export default nextConfig;
-  
+  experimental: {
+    appDir: true, // Isso deve estar habilitado se você estiver usando a estrutura `src/app`.
+  },
+};
+
+export default nextConfig;

@@ -11,11 +11,15 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { NotificationContainer , NotificationManager} from 'react-notifications';
+import Tooltip from '@mui/material/Tooltip';
 
 interface CardsProps {
     codigo: number,
     dataUpload?: string,
     loginCriador?: string,
+    isLiked?: boolean,
+    isDownloaded?: boolean,
     nome?: string,
     cCategoria?: number,
     categoriaNome?: string,
@@ -34,10 +38,23 @@ export default function CardsDownload(props: CardsProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isClient, setIsClient] = useState(false);
+  const [isLiked, setIsLiked] = useState<any>(null);
+  const [qtdLikes, setQtdLikes] = useState<any>(null);
+  const [qtdDownloads, setQtdDownloads] = useState<any>(null);
+  const [isDownloaded, setIsDownloaded] = useState<any>(null);
 
   useEffect(() => {
     setIsClient(true);
   }, [])
+
+  useEffect(() => {
+    if (props) {
+      setIsLiked(props?.isLiked);
+      setQtdLikes(props?.likes);
+      setQtdDownloads(props?.qtdDownloads);
+      setIsDownloaded(props?.isDownloaded);
+    }
+  }, [props])
 
   const voltarAoTopo = () => {
     window.scrollTo({
@@ -80,6 +97,26 @@ export default function CardsDownload(props: CardsProps) {
     }
   }
 
+  const handleClickLike = (codigo: number) => {
+    if (!isLiked) {
+      setIsLiked(true);
+      setQtdLikes(qtdLikes+1);
+      NotificationManager.success('Curtiu!','Arquivo');
+    } else {
+      setIsLiked(false);
+      setQtdLikes(qtdLikes-1);
+      NotificationManager.success('Deixou de Curtir!','Arquivo');
+    }
+  };
+
+  const handleClickDownload = (codigo: number) => {
+    if (!isDownloaded) {
+      setQtdDownloads(qtdDownloads + 1);
+    } else {
+      setQtdDownloads(qtdDownloads - 1);
+    }
+  };
+
   return (
     <>
       { isClient &&
@@ -94,7 +131,9 @@ export default function CardsDownload(props: CardsProps) {
               <div className={styles.cardContent}
                 onClick={() => handleMenuClick(props?.codigo)}
               >
-                  <h3>{props.nome}</h3>
+                  <Tooltip title={props.nome}>
+                    <h3 >{props.nome}</h3>
+                  </Tooltip>
                   {props?.nomePlataforma !== '' && <div 
                       style={{
                           display: 'flex', 
@@ -110,13 +149,16 @@ export default function CardsDownload(props: CardsProps) {
               </div>
 
             <div className={styles.cardButtons}>
-                <button><ThumbUpAltIcon className={styles.icon}/><p>{props.likes}</p></button>
-                <button >
+                <button onClick={() => handleClickLike(props.codigo)}>
+                  <ThumbUpAltIcon className={styles.icon} sx={isLiked ? {color: '#9d2053'} : {}}/>
+                  <p >{qtdLikes}</p>
+                </button>
+                <button onClick={() => handleClickDownload(props.codigo)}>
                   <a href={`https://drive.google.com/uc?export=download&id=197RRsKjPCR5jYNFBFPsSDABme2Ryk-aq`}>
                     <FileDownloadRoundedIcon 
                       className={styles.icon}
                     />
-                      <p>{props.qtdDownloads}</p>
+                      <p>{qtdDownloads}</p>
                   </a>
                 </button>
             </div>
