@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Plataforma de Compartilhamento de IRs e Capturas para Pedais de Guitarra 🎸
 
-## Getting Started
+Este projeto é uma plataforma comunitária onde usuários podem se cadastrar, seguir uns aos outros e compartilhar arquivos de IRs e capturas para pedais de guitarra, promovendo uma troca rica de experiências e arquivos entre músicos e entusiastas de pedais. A aplicação foi desenvolvida com foco em facilitar a troca e interação dentro da comunidade.
 
-First, run the development server:
+## Índice
+- [Recursos](#recursos)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Instalação](#instalação)
+- [Como Usar](#como-usar)
+- [Contribuição](#contribuição)
+- [Licença](#licença)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Recursos
+- **Autenticação e Cadastro de Usuários**: Cadastro e login seguros, permitindo que usuários personalizem seus perfis e interajam uns com os outros.
+- **Seguir e Interagir**: Sistema de seguidores para acompanhar os perfis e atividades de outros membros da comunidade.
+- **Compartilhamento de Arquivos**: Upload e compartilhamento de arquivos de IRs e capturas para pedais de guitarra, permitindo fácil acesso e troca de configurações e sons.
+- **Biblioteca de Arquivos**: Visualização de arquivos compartilhados, com fácil navegação para explorar e baixar arquivos de outros usuários.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologias Utilizadas
+- **Next.js**: Framework de React para renderização do lado do servidor e SEO otimizado.
+- **TypeScript**: Adiciona tipos ao código, facilitando a manutenção e reduzindo erros.
+- **Material UI**: Biblioteca de componentes para um design visual atraente e funcional.
+- **Supabase**: Utilizado para autenticação e armazenamento de arquivos.
+- **PostgreSQL**: Banco de dados relacional para armazenamento dos dados de usuários, conexões e arquivos.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Instalação
+1. Clone este repositório:
+    ```bash
+    git clone https://github.com/leonardo-marley/ir-and-captures.git
+    cd ir-and-captures
+    ```
+2. Instale as dependências:
+    ```bash
+    npm install
+    ```
+3. Configure suas variáveis de ambiente para autenticação e banco de dados:
+   - Crie um arquivo `.env.local` e adicione:
+     ```env
+     NEXT_PUBLIC_SUPABASE_URL=sua-url-supabase
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-anon-key
+     POSTGRES_DB_URL=sua-url-postgres
+     ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Inicie o servidor de desenvolvimento:
+    ```bash
+    npm run dev
+    ```
 
-## Learn More
+5. Acesse `http://localhost:3000` no navegador para explorar a plataforma.
 
-To learn more about Next.js, take a look at the following resources:
+## Como Usar
+1. **Cadastro e Login**: Crie uma conta ou faça login.
+2. **Explorar a Comunidade**: Navegue pela plataforma e siga outros usuários para acompanhar seus uploads.
+3. **Upload de Arquivos**: Compartilhe seus próprios arquivos de IRs e capturas.
+4. **Interaja com Outros Músicos**: Explore e faça download de arquivos de outros membros, expandindo seu acervo de configurações.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contribuição
+Contribuições são bem-vindas! Para contribuir:
+1. Faça um fork do projeto.
+2. Crie uma branch com a sua feature (`git checkout -b feature/nova-feature`).
+3. Comite suas mudanças (`git commit -m 'Adiciona nova feature'`).
+4. Faça o push para a branch (`git push origin feature/nova-feature`).
+5. Abra um Pull Request.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Licença
+Este projeto é licenciado sob a licença MIT.
